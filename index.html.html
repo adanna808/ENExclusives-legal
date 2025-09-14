@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Elizabeth N Exclusives — Legal & Help Hub</title>
+  <meta name="description" content="Central hub for Elizabeth N Exclusives — legal pages and knowledge base."/>
+  <style>
+    :root{--lavender:#C8B6E2;--blush:#F4C2C2;--green:#A8D5BA;--gold:#D4A017;--ink:#1C1C1C;--muted:#6B7280;--border:rgba(0,0,0,.10);--bg:#ffffff;}
+    *{box-sizing:border-box} html,body{margin:0;padding:0}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--ink);background:var(--bg);line-height:1.6;
+      background:radial-gradient(900px 360px at 90% 8%, rgba(168,213,186,.12), transparent 60%),
+                 radial-gradient(740px 300px at 8% 92%, rgba(200,182,226,.12), transparent 60%),
+                 radial-gradient(680px 280px at 70% 70%, rgba(244,194,194,.12), transparent 60%),
+                 linear-gradient(180deg,#fff,#fff);}
+    header{position:sticky;top:0;z-index:10;background:linear-gradient(90deg, rgba(200,182,226,.12), rgba(168,213,186,.12));border-bottom:1px solid var(--border);backdrop-filter:blur(6px)}
+    .wrap{max-width:1100px;margin:0 auto;padding:22px 18px}
+    .brand{font-weight:800;font-size:20px}
+    .lead{color:var(--muted);margin:6px 0 0}
+    .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:14px 0}
+    .chip{padding:8px 12px;border:1px solid var(--border);border-radius:999px;background:#fff;cursor:pointer;font-size:14px}
+    .chip.active{background:#111;color:#fff;border-color:#111}
+    .search{flex:1;min-width:220px;padding:10px 12px;border:1px solid var(--border);border-radius:12px}
+    .section{margin-top:10px}
+    h2{font-size:18px;margin:10px 0 8px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+    .card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:14px;box-shadow:0 10px 30px rgba(0,0,0,.04)}
+    .card a{color:#111;text-decoration:none}
+    .card a:hover{opacity:.85}
+    .badge{display:inline-block;font-size:12px;padding:2px 8px;border-radius:999px;background:rgba(212,160,23,.14);color:#7a5b0b}
+    footer{border-top:1px solid var(--border);margin-top:26px}
+    .muted{color:var(--muted);font-size:13px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="brand">Elizabeth N Exclusives — Legal & Help Hub</div>
+      <p class="lead">Quick links to every public page in this repository.</p>
+      <div class="toolbar">
+        <input id="q" class="search" type="search" placeholder="Search pages… (e.g. refund, download, privacy)"/>
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="legal">Legal</button>
+        <button class="chip" data-filter="kb">Knowledge Base</button>
+        <button class="chip" data-filter="downloads">Downloads</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- LEGAL -->
+    <section class="section">
+      <h2>Legal</h2>
+      <div class="grid">
+        <div class="card" data-cat="legal" data-title="Terms of Service terms">
+          <span class="badge">Legal</span><br/>
+          <a href="./terms.html"><b>Terms of Service</b></a>
+          <p class="muted">Usage rules, rights, and liabilities.</p>
+        </div>
+        <div class="card" data-cat="legal" data-title="Privacy Policy privacy">
+          <span class="badge">Legal</span><br/>
+          <a href="./privacy.html"><b>Privacy Policy</b></a>
+          <p class="muted">Data collection, use, and your rights.</p>
+        </div>
+        <div class="card" data-cat="legal" data-title="Refunds & Returns refunds">
+          <span class="badge">Legal</span><br/>
+          <a href="./refunds.html"><b>Refunds & Returns</b></a>
+          <p class="muted">Eligibility and how to request a refund.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- KNOWLEDGE BASE -->
+    <section class="section">
+      <h2>Knowledge Base</h2>
+      <div class="grid" id="kb-cards">
+        <div class="card" data-cat="kb" data-title="Create account sign in account-create-sign-in">
+          <span class="badge">KB</span><br/>
+          <a href="./account-create-sign-in.html"><b>Create an account & sign in</b></a>
+          <p class="muted">Set up your account, verify email, reset password.</p>
+        </div>
+        <div class="card" data-cat="kb" data-title="Download after purchase">
+          <span class="badge">KB</span><br/>
+          <a href="./download-after-purchase.html"><b>Download after purchase</b></a>
+          <p class="muted">Find links on the order page or in your email.</p>
+        </div>
+        <div class="card" data-cat="kb" data-title="Troubleshooting downloads won’t open">
+          <span class="badge">KB</span><br/>
+          <a href="./troubleshooting-downloads.html"><b>Troubleshooting downloads</b></a>
+          <p class="muted">Fix failed downloads or files that won’t open.</p>
+        </div>
+        <div class="card" data-cat="kb" data-title="Payment methods Nigeria cards bank transfer">
+          <span class="badge">KB</span><br/>
+          <a href="./payment-methods-nigeria.html"><b>Payment methods (Nigeria)</b></a>
+          <p class="muted">Cards, bank transfer options, and common issues.</p>
+        </div>
+        <div class="card" data-cat="kb" data-title="Refunds returns how to request">
+          <span class="badge">KB</span><br/>
+          <a href="./refunds-returns-how-to.html"><b>How to request a refund/return</b></a>
+          <p class="muted">What qualifies and how to contact support.</p>
+        </div>
+        <div class="card" data-cat="kb" data-title="Using Returnee Toolkit overview">
+          <span class="badge">KB</span><br/>
+          <a href="./using-returnee-toolkit-overview.html"><b>Using the Returnee Toolkit</b></a>
+          <p class="muted">Where to start and key features.</p>
+        </div>
+        <div class="card" data-cat="kb" data-title="Before you fly guide checklist">
+          <span class="badge">KB</span><br/>
+          <a href="./before-you-fly-guide.html"><b>Before You Fly — Guide</b></a>
+          <p class="muted">Prep documents, finance, housing, health.</p>
+        </div>
+        <div class="card" data-cat="kb" data-title="First week guide landing">
+          <span class="badge">KB</span><br/>
+          <a href="./first-week-guide.html"><b>First Week — Guide</b></a>
+          <p class="muted">SIM/data, cash, clinic, transport, safety.</p>
+        </div>
+        <div class="card" data-cat="kb" data-title="First month guide settling utilities">
+          <span class="badge">KB</span><br/>
+          <a href="./first-month-guide.html"><b>First Month — Guide</b></a>
+          <p class="muted">Housing, utilities, internet, HMO, budget.</p>
+        </div>
+        <div class="card" data-cat="kb" data-title="Meal planner how to Nigerian 7 day">
+          <span class="badge">KB</span><br/>
+          <a href="./meal-planner-how-to.html"><b>Meal Planner — How to</b></a>
+          <p class="muted">Use servings slider & shopping list.</p>
+        </div>
+        <div class="card" data-cat="kb" data-title="Mobile apps links access">
+          <span class="badge">KB</span><br/>
+          <a href="./mobile-apps-links-access.html"><b>Where to find our mobile apps</b></a>
+          <p class="muted">App links and “coming soon” flow.</p>
+        </div>
+        <div class="card" data-cat="kb" data-title="Orders receipts manage">
+          <span class="badge">KB</span><br/>
+          <a href="./order-receipts-manage.html"><b>Access orders & receipts</b></a>
+          <p class="muted">View purchases and re-download files.</p>
+        </div>
+        <div class="card" data-cat="kb" data-title="Pricing currency VAT taxes">
+          <span class="badge">KB</span><br/>
+          <a href="./pricing-currency-vat.html"><b>Prices, currency & taxes</b></a>
+          <p class="muted">NGN pricing and any applicable fees.</p>
+        </div>
+        <div class="card" data-cat="kb" data-title="Privacy and data summary">
+          <span class="badge">KB</span><br/>
+          <a href="./privacy-and-data-summary.html"><b>Privacy & data — summary</b></a>
+          <p class="muted">What we collect, how it’s used.</p>
+        </div>
+        <div class="card" data-cat="kb" data-title="Contact support request email">
+          <span class="badge">KB</span><br/>
+          <a href="./contact-support-request.html"><b>Contact support — what to include</b></a>
+          <p class="muted">Faster help checklist for your email.</p>
+        </div>
+        <div class="card" data-cat="kb" data-title="Vendor onboarding marketplace sell">
+          <span class="badge">KB</span><br/>
+          <a href="./vendor-onboarding-marketplace.html"><b>Vendor onboarding — sell with us</b></a>
+          <p class="muted">How to express interest and next steps.</p>
+        </div>
+        <div class="card" data-cat="kb" data-title="Accessibility features">
+          <span class="badge">KB</span><br/>
+          <a href="./accessibility-features.html"><b>Accessibility features</b></a>
+          <p class="muted">Keyboard, contrast, larger text & print.</p>
+        </div>
+        <div class="card" data-cat="kb" data-title="Security safe shopping">
+          <span class="badge">KB</span><br/>
+          <a href="./security-safe-shopping.html"><b>Security: safe shopping</b></a>
+          <p class="muted">Card safety, OTP, suspicious messages.</p>
+        </div>
+        <div class="card" data-cat="kb" data-title="Update email password profile">
+          <span class="badge">KB</span><br/>
+          <a href="./update-email-password.html"><b>Update email or password</b></a>
+          <p class="muted">Profile changes & verification.</p>
+        </div>
+        <div class="card" data-cat="kb" data-title="Side hustle generator how to">
+          <span class="badge">KB</span><br/>
+          <a href="./side-hustle-generator-how-to.html"><b>Side-Hustle Ideas — How to</b></a>
+          <p class="muted">Filter ideas, quick-start kits, export.</p>
+        </div>
+        <div class="card" data-cat="kb" data-title="Returnee checklist full page">
+          <span class="badge">KB</span><br/>
+          <a href="./returnee-checklist.html"><b>Returnee Checklist (full)</b></a>
+          <p class="muted">Complete, searchable checklist.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOWNLOADS -->
+    <section class="section">
+      <h2>Downloads</h2>
+      <div class="grid">
+        <div class="card" data-cat="downloads" data-title="Site HTML bundle zip enx-site-html.zip">
+          <span class="badge">Downloads</span><br/>
+          <a href="./enx-site-html.zip"><b>Site HTML bundle (.zip)</b></a>
+          <p class="muted">Zipped HTML assets for backup or transfer.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap muted">
+      © <span id="year"></span> Elizabeth N Exclusives Market Hub ·
+      Support: <a href="mailto:lizukandu@gmail.com">lizukandu@gmail.com</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const q = document.getElementById('q');
+    const chips = Array.from(document.querySelectorAll('.chip'));
+    const cards = Array.from(document.querySelectorAll('.card'));
+    function applyFilter(){
+      const term = (q.value || '').toLowerCase().trim();
+      const activeChip = document.querySelector('.chip.active');
+      const cat = activeChip ? activeChip.getAttribute('data-filter') : 'all';
+      cards.forEach(c => {
+        const title = (c.getAttribute('data-title') || '').toLowerCase();
+        const inSearch = !term || title.includes(term);
+        const inCat = cat === 'all' || c.getAttribute('data-cat') === cat;
+        c.style.display = (inSearch && inCat) ? '' : 'none';
+      });
+    }
+    q.addEventListener('input', applyFilter);
+    chips.forEach(ch => ch.addEventListener('click', () => {
+      chips.forEach(x => x.classList.remove('active'));
+      ch.classList.add('active');
+      applyFilter();
+    }));
+  </script>
+</body>
+</html>

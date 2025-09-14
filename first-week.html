@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>First Week — Elizabeth N Exclusives</title>
+  <meta name="description" content="First Week checklist with interactive progress, notes, and print-friendly layout.">
+  <style>
+:root{
+  --lavender:#C8B6E2; --blush:#F4C2C2; --green:#A8D5BA; --gold:#D4A017;
+  --ink:#1C1C1C; --muted:#6B7280; --bg:#ffffff; --card:#fff; --border:rgba(0,0,0,.08);
+}
+*{box-sizing:border-box} html,body{margin:0;padding:0}
+body{
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  color:var(--ink); background: var(--bg); line-height:1.6;
+  background:
+    radial-gradient(900px 360px at 90% 8%, rgba(168,213,186,.18), transparent 60%),
+    radial-gradient(740px 300px at 8% 92%, rgba(200,182,226,.18), transparent 60%),
+    radial-gradient(680px 280px at 70% 70%, rgba(244,194,194,.18), transparent 60%),
+    linear-gradient(180deg,#fff,#fff);
+}
+.wrap{max-width:1100px;margin:0 auto;padding:24px 20px}
+header.site{
+  position:sticky; top:0; z-index:40;
+  background: linear-gradient(90deg, rgba(200,182,226,.12), rgba(168,213,186,.12));
+  backdrop-filter: blur(6px);
+  border-bottom:1px solid var(--border);
+}
+.site .inner{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.brand{font-weight:700}
+.nav a{margin-right:10px;color:var(--ink);text-decoration:none;padding:6px 8px;border-radius:8px}
+.nav a.active{background:rgba(212,160,23,.14)}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn,.ghost{display:inline-block; padding:10px 14px; border-radius:10px; text-decoration:none; font-size:14px;}
+.btn{background:var(--ink); color:#fff} .ghost{border:1px solid var(--border); color:var(--ink); background:#fff}
+.btn:hover{transform:translateY(-1px)}
+h1{font-size:34px;margin:10px 0} .lead{color:var(--muted); margin-top:0}
+.tools{display:flex;flex-wrap:wrap; gap:10px; margin:14px 0 22px}
+.tools input[type="search"]{padding:10px 12px; border:1px solid var(--border); border-radius:10px; min-width:240px}
+.progress{margin:16px 0 24px; padding:14px; border:1px solid var(--border); border-radius:16px; background:#fff; display:grid; gap:10px}
+.bar{height:10px; background:rgba(0,0,0,.06); border-radius:999px; overflow:hidden}
+.bar>i{display:block; height:100%; background:linear-gradient(90deg,var(--lavender),var(--green)); width:0%}
+.grid{display:grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap:14px}
+.card{background:var(--card); border:1px solid var(--border); border-radius:16px; padding:14px; box-shadow:0 10px 30px rgba(0,0,0,.04)}
+.card h3{margin:4px 0 8px; font-size:18px}
+.meta{display:flex; justify-content:space-between; color:var(--muted); font-size:13px}
+ul.tasks{list-style:none;padding:0;margin:10px 0 0}
+.task{display:flex; gap:10px; align-items:flex-start; padding:6px 0; border-bottom:1px dashed rgba(0,0,0,.06)}
+.task:last-child{border-bottom:0}
+.task input[type="checkbox"]{margin-top:4px; width:18px; height:18px}
+.task label{flex:1} .task small{display:block; color:var(--muted)}
+.badge{display:inline-block; font-size:12px; padding:2px 8px; border-radius:999px; background:rgba(212,160,23,.14); color:#7a5b0b}
+.note{margin-top:10px} .note textarea{width:100%; min-height:60px; padding:10px; border:1px solid var(--border); border-radius:8px}
+footer.site{border-top:1px solid var(--border); margin-top:28px; padding-top:12px; color:#6B7280; font-size:14px}
+@media print{
+  header.site, .tools, .actions, .note textarea, .nav { display:none !important; }
+  body{background:#fff} .card{page-break-inside:avoid} .wrap{max-width:100%; padding:0 8mm}
+}
+</style>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap inner">
+      <div class="brand">Elizabeth N Exclusives — Returnee Toolkit</div>
+      <nav class="nav">
+        <a href="./before-you-fly.html" class="">Before You Fly</a>
+        <a href="./first-week.html" class="active">First Week</a>
+        <a href="./first-month.html" class="">First Month</a>
+      </nav>
+      <div class="actions">
+        <a class="ghost" href="#" id="exportBtn">Export</a>
+        <a class="ghost" href="#" id="importBtn">Import</a>
+        <a class="btn" href="#" onclick="window.print()">Print</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <h1>First Week</h1>
+    <p class="lead">Your focused plan for Days 1–3 and Week 1: SIM, banking, clinic, utilities research, and essential setup.</p>
+
+    <div class="tools">
+      <input type="search" id="search" placeholder="Filter tasks (e.g., ‘passport’, ‘SIM’, ‘lease’)"/>
+      <a class="ghost" href="#" id="clearCompleted">Clear completed</a>
+      <a class="ghost" href="#" id="resetAll">Reset all</a>
+    </div>
+
+    <section class="progress">
+      <div class="meta"><span class="badge">Overall</span> <span id="overallPct">0% complete</span></div>
+      <div class="bar"><i id="overallBar" style="width:0%"></i></div>
+    </section>
+
+    <section class="grid" id="sections"></section>
+
+    <footer class="site"><p>&copy; <span id="year"></span> Elizabeth N Exclusives Market Hub — Support: <a href="mailto:lizukandu@gmail.com">lizukandu@gmail.com</a></p></footer>
+  </main>
+
+  <script>
+  const PAGE_ID = "week1";
+  const STORAGE_KEY = "enx_checklist_" + PAGE_ID + "_v1";
+  const DATA = [{"id": "arrival", "title": "Arrival (Days 1\u20133)", "noteKey": "note_arrival", "items": [["sim_register", "SIM registration", "Link NIN; keep backup SIM/MiFi."], ["data_plan", "Choose data plan", "Primary + backup; confirm coverage at home/office."], ["cash_atm", "Initial cash & ATM access", "Test card withdrawals; set USSD mobile banking."], ["airport_transport", "Airport pickup & rides", "Trusted driver; ride\u2011hailing setup; safety rules."], ["groceries", "Essential groceries & water", "First 3\u20135 days; note reliable supermarkets/markets."], ["clinic_register", "Register with clinic/hospital", "Carry ID; understand emergencies; save numbers."]]}, {"id": "week1", "title": "Week 1 Essentials", "noteKey": "note_week1", "items": [["bank_kyc", "Bank KYC & account verification", "Provide proof of address/ID; activate cards."], ["apps_maps", "Install local apps & maps", "Ride\u2011hailing; offline maps; delivery; save key locations."], ["utilities_research", "Utilities research", "Power options, internet ISPs, waste, water suppliers."], ["security_basics", "Home & personal security basics", "Low\u2011profile habits; lighting; duplicate keys."], ["emergency_numbers", "Emergency numbers", "Local emergency lines; hospitals; trusted contacts."]]}];
+
+  const ROOT = document.getElementById('sections');
+
+  function loadState(){ try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch(_) { return {}; } }
+  function saveState(s){ localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); }
+  function percent(n,d){ return d? Math.round((n/d)*100):0; }
+
+  function render(){
+    const state = loadState();
+    ROOT.innerHTML = "";
+    let total=0, done=0;
+    DATA.forEach(section => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      const items = section.items;
+      const sectionDone = items.filter(([id]) => state[id]).length;
+      const sectionPct = percent(sectionDone, items.length);
+      done += sectionDone; total += items.length;
+      card.innerHTML = `
+        <div class="meta"><span class="badge">${section.title}</span><span>${sectionPct}%</span></div>
+        <ul class="tasks">
+          ${items.map(([id, title, hint]) => `
+            <li class="task" data-id="${id}">
+              <input type="checkbox" id="${id}" ${state[id] ? 'checked' : ''}>
+              <label for="${id}">${title}${hint?`<small>${hint}</small>`:''}</label>
+            </li>
+          `).join('')}
+        </ul>
+        <div class="note">
+          <label><small>Notes (${section.title})</small></label>
+          <textarea data-note="${section.noteKey}" placeholder="Add any notes or contacts...">${state[section.noteKey]||""}</textarea>
+        </div>
+      `;
+      ROOT.appendChild(card);
+    });
+    const overallPct = percent(done, total);
+    document.getElementById('overallPct').textContent = `${overallPct}% complete`;
+    document.getElementById('overallBar').style.width = `${overallPct}%`;
+
+    ROOT.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      cb.addEventListener('change', e => {
+        const s = loadState(); s[e.target.id] = e.target.checked; saveState(s); render(); applySearch();
+      });
+    });
+    ROOT.querySelectorAll('textarea').forEach(ta => {
+      ta.addEventListener('input', e => {
+        const key = e.target.dataset.note; const s = loadState(); s[key] = e.target.value; saveState(s);
+      });
+    });
+  }
+
+  function applySearch(){
+    const q = document.getElementById('search').value.toLowerCase().trim();
+    ROOT.querySelectorAll('.task').forEach(el => {
+      if(!q){ el.style.display = ""; return; }
+      const label = el.querySelector('label').innerText.toLowerCase();
+      el.style.display = label.includes(q) ? "" : "none";
+    });
+  }
+  function clearCompleted(){
+    const s = loadState(); DATA.forEach(sec => sec.items.forEach(([id]) => { if(s[id]) delete s[id]; }));
+    saveState(s); render(); applySearch();
+  }
+  function resetAll(){
+    if(confirm("Reset all checks and notes for this page?")){ localStorage.removeItem(STORAGE_KEY); render(); applySearch(); }
+  }
+  function exportState(){
+    const data = localStorage.getItem(STORAGE_KEY) || "{}";
+    const blob = new Blob([data], {type:"application/json"});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+    a.download = PAGE_ID + "-checklist-backup.json"; document.body.appendChild(a); a.click(); a.remove();
+  }
+  function importState(){
+    const inp = document.createElement('input'); inp.type = "file"; inp.accept = "application/json";
+    inp.addEventListener('change', () => {
+      const file = inp.files[0]; if(!file) return;
+      const reader = new FileReader();
+      reader.onload = e => { try { localStorage.setItem(STORAGE_KEY, e.target.result); render(); applySearch(); } catch(err){ alert("Invalid backup file."); } };
+      reader.readAsText(file);
+    });
+    inp.click();
+  }
+
+  document.getElementById('search').addEventListener('input', applySearch);
+  document.getElementById('clearCompleted').addEventListener('click', (e)=>{e.preventDefault(); clearCompleted();});
+  document.getElementById('resetAll').addEventListener('click', (e)=>{e.preventDefault(); resetAll();});
+  document.getElementById('exportBtn').addEventListener('click', (e)=>{e.preventDefault(); exportState();});
+  document.getElementById('importBtn').addEventListener('click', (e)=>{e.preventDefault(); importState();});
+  document.getElementById('year').textContent = new Date().getFullYear();
+  render();
+  </script>
+</body>
+</html>

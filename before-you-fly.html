@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Before You Fly — Elizabeth N Exclusives</title>
+  <meta name="description" content="Before You Fly checklist with interactive progress, notes, and print-friendly layout.">
+  <style>
+:root{
+  --lavender:#C8B6E2; --blush:#F4C2C2; --green:#A8D5BA; --gold:#D4A017;
+  --ink:#1C1C1C; --muted:#6B7280; --bg:#ffffff; --card:#fff; --border:rgba(0,0,0,.08);
+}
+*{box-sizing:border-box} html,body{margin:0;padding:0}
+body{
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  color:var(--ink); background: var(--bg); line-height:1.6;
+  background:
+    radial-gradient(900px 360px at 90% 8%, rgba(168,213,186,.18), transparent 60%),
+    radial-gradient(740px 300px at 8% 92%, rgba(200,182,226,.18), transparent 60%),
+    radial-gradient(680px 280px at 70% 70%, rgba(244,194,194,.18), transparent 60%),
+    linear-gradient(180deg,#fff,#fff);
+}
+.wrap{max-width:1100px;margin:0 auto;padding:24px 20px}
+header.site{
+  position:sticky; top:0; z-index:40;
+  background: linear-gradient(90deg, rgba(200,182,226,.12), rgba(168,213,186,.12));
+  backdrop-filter: blur(6px);
+  border-bottom:1px solid var(--border);
+}
+.site .inner{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.brand{font-weight:700}
+.nav a{margin-right:10px;color:var(--ink);text-decoration:none;padding:6px 8px;border-radius:8px}
+.nav a.active{background:rgba(212,160,23,.14)}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn,.ghost{display:inline-block; padding:10px 14px; border-radius:10px; text-decoration:none; font-size:14px;}
+.btn{background:var(--ink); color:#fff} .ghost{border:1px solid var(--border); color:var(--ink); background:#fff}
+.btn:hover{transform:translateY(-1px)}
+h1{font-size:34px;margin:10px 0} .lead{color:var(--muted); margin-top:0}
+.tools{display:flex;flex-wrap:wrap; gap:10px; margin:14px 0 22px}
+.tools input[type="search"]{padding:10px 12px; border:1px solid var(--border); border-radius:10px; min-width:240px}
+.progress{margin:16px 0 24px; padding:14px; border:1px solid var(--border); border-radius:16px; background:#fff; display:grid; gap:10px}
+.bar{height:10px; background:rgba(0,0,0,.06); border-radius:999px; overflow:hidden}
+.bar>i{display:block; height:100%; background:linear-gradient(90deg,var(--lavender),var(--green)); width:0%}
+.grid{display:grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap:14px}
+.card{background:var(--card); border:1px solid var(--border); border-radius:16px; padding:14px; box-shadow:0 10px 30px rgba(0,0,0,.04)}
+.card h3{margin:4px 0 8px; font-size:18px}
+.meta{display:flex; justify-content:space-between; color:var(--muted); font-size:13px}
+ul.tasks{list-style:none;padding:0;margin:10px 0 0}
+.task{display:flex; gap:10px; align-items:flex-start; padding:6px 0; border-bottom:1px dashed rgba(0,0,0,.06)}
+.task:last-child{border-bottom:0}
+.task input[type="checkbox"]{margin-top:4px; width:18px; height:18px}
+.task label{flex:1} .task small{display:block; color:var(--muted)}
+.badge{display:inline-block; font-size:12px; padding:2px 8px; border-radius:999px; background:rgba(212,160,23,.14); color:#7a5b0b}
+.note{margin-top:10px} .note textarea{width:100%; min-height:60px; padding:10px; border:1px solid var(--border); border-radius:8px}
+footer.site{border-top:1px solid var(--border); margin-top:28px; padding-top:12px; color:#6B7280; font-size:14px}
+@media print{
+  header.site, .tools, .actions, .note textarea, .nav { display:none !important; }
+  body{background:#fff} .card{page-break-inside:avoid} .wrap{max-width:100%; padding:0 8mm}
+}
+</style>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap inner">
+      <div class="brand">Elizabeth N Exclusives — Returnee Toolkit</div>
+      <nav class="nav">
+        <a href="./before-you-fly.html" class="active">Before You Fly</a>
+        <a href="./first-week.html" class="">First Week</a>
+        <a href="./first-month.html" class="">First Month</a>
+      </nav>
+      <div class="actions">
+        <a class="ghost" href="#" id="exportBtn">Export</a>
+        <a class="ghost" href="#" id="importBtn">Import</a>
+        <a class="btn" href="#" onclick="window.print()">Print</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <h1>Before You Fly</h1>
+    <p class="lead">Everything to prepare from documents and health to housing, finance, logistics, and safety—so arrival is smooth.</p>
+
+    <div class="tools">
+      <input type="search" id="search" placeholder="Filter tasks (e.g., ‘passport’, ‘SIM’, ‘lease’)"/>
+      <a class="ghost" href="#" id="clearCompleted">Clear completed</a>
+      <a class="ghost" href="#" id="resetAll">Reset all</a>
+    </div>
+
+    <section class="progress">
+      <div class="meta"><span class="badge">Overall</span> <span id="overallPct">0% complete</span></div>
+      <div class="bar"><i id="overallBar" style="width:0%"></i></div>
+    </section>
+
+    <section class="grid" id="sections"></section>
+
+    <footer class="site"><p>&copy; <span id="year"></span> Elizabeth N Exclusives Market Hub — Support: <a href="mailto:lizukandu@gmail.com">lizukandu@gmail.com</a></p></footer>
+  </main>
+
+  <script>
+  const PAGE_ID = "before";
+  const STORAGE_KEY = "enx_checklist_" + PAGE_ID + "_v1";
+  const DATA = [{"id": "docs", "title": "Documents", "noteKey": "note_docs", "items": [["passport_validity", "Check passport validity (\u2265 6 months)", "Renew if expiring soon; scan and store in cloud."], ["gather_docs", "Gather key documents", "Birth/marriage certificates, transcripts, licenses; certified copies."], ["medical_records", "Medical & vaccination records", "Yellow fever card; prescriptions; allergies; glasses Rx."], ["police_clear", "Police clearance (if required)", "Confirm requirement based on your situation."], ["drivers", "Driver\u2019s licence (convert/renew)", "Check process and appointments."], ["digital_backup", "Digital backup of all docs", "Scan to PDF; share with a trusted contact."]]}, {"id": "plan_identity", "title": "Identity & Accounts", "noteKey": "note_identity", "items": [["nin_plan", "Plan NIN enrollment/verification", "Locate nearest center; list required IDs."], ["bvn_plan", "Plan BVN creation/reactivation", "Bank shortlist + requirements."], ["sim_plan", "SIM plan", "Choose networks; keep unlocked phone; dual SIM if possible."]]}, {"id": "finance_prep", "title": "Finance Prep", "noteKey": "note_finance", "items": [["money_routes", "Set up money transfer routes", "Pick providers; test small transfer; note fees & timing."], ["bank_shortlist", "Shortlist 2\u20133 banks", "KYC requirements; branch proximity."], ["emergency_fund", "Emergency fund in NGN", "Target 1\u20133 months; plan funding."], ["cards_apps", "Bank cards & apps ready", "International limits; install apps; USSD codes list."]]}, {"id": "housing_prep", "title": "Housing Research", "noteKey": "note_housing", "items": [["short_stay", "Book short\u2011term stay", "1\u20134 weeks near target neighbourhood; flexible cancellation."], ["agent_verify", "Agent shortlist & verification", "Ask for references; avoid cash; receipts & agreements."], ["neighbourhood_research", "Neighbourhood research", "Commute, safety, markets, noise; view at varied times."]]}, {"id": "health_prep", "title": "Health Prep", "noteKey": "note_health", "items": [["hmo_compare", "Compare health insurance/HMO", "Hospitals in-network near target home/office."], ["meds", "Medication continuity plan", "90\u2011day supply; local equivalents; doctor letters if needed."], ["records", "Digitize key medical records", "Blood type, allergies, conditions."]]}, {"id": "logistics_prep", "title": "Logistics & Shipping", "noteKey": "note_logistics", "items": [["ship_agent", "Select shipping/clearing agent", "Written quotes; timelines; customs document list."], ["inventory", "Create shipment inventory", "Box #, item list, values for customs."], ["airport_pickup_plan", "Airport pickup plan", "Trusted driver; ride\u2011hailing apps; cash on arrival."]]}, {"id": "work_prep", "title": "Work/Business Prep", "noteKey": "note_work", "items": [["cv_linkedin", "Update CV/LinkedIn", "Adapt for local market; references; portfolio."], ["networking", "Networking plan", "Professional groups; mentors; events calendar."], ["payments_toolkit", "Payments toolkit plan", "Decide processors; receipts templates; POS if needed."]]}, {"id": "safety_prep", "title": "Safety & Contacts", "noteKey": "note_safety", "items": [["emergency_contacts", "Prepare emergency contacts", "Family, friends, embassy; nearest hospitals list."], ["device_unlock", "Unlock devices & adapters", "Universal adapters; surge protectors; power bank."]]}];
+
+  const ROOT = document.getElementById('sections');
+
+  function loadState(){ try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch(_) { return {}; } }
+  function saveState(s){ localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); }
+  function percent(n,d){ return d? Math.round((n/d)*100):0; }
+
+  function render(){
+    const state = loadState();
+    ROOT.innerHTML = "";
+    let total=0, done=0;
+    DATA.forEach(section => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      const items = section.items;
+      const sectionDone = items.filter(([id]) => state[id]).length;
+      const sectionPct = percent(sectionDone, items.length);
+      done += sectionDone; total += items.length;
+      card.innerHTML = `
+        <div class="meta"><span class="badge">${section.title}</span><span>${sectionPct}%</span></div>
+        <ul class="tasks">
+          ${items.map(([id, title, hint]) => `
+            <li class="task" data-id="${id}">
+              <input type="checkbox" id="${id}" ${state[id] ? 'checked' : ''}>
+              <label for="${id}">${title}${hint?`<small>${hint}</small>`:''}</label>
+            </li>
+          `).join('')}
+        </ul>
+        <div class="note">
+          <label><small>Notes (${section.title})</small></label>
+          <textarea data-note="${section.noteKey}" placeholder="Add any notes or contacts...">${state[section.noteKey]||""}</textarea>
+        </div>
+      `;
+      ROOT.appendChild(card);
+    });
+    const overallPct = percent(done, total);
+    document.getElementById('overallPct').textContent = `${overallPct}% complete`;
+    document.getElementById('overallBar').style.width = `${overallPct}%`;
+
+    ROOT.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      cb.addEventListener('change', e => {
+        const s = loadState(); s[e.target.id] = e.target.checked; saveState(s); render(); applySearch();
+      });
+    });
+    ROOT.querySelectorAll('textarea').forEach(ta => {
+      ta.addEventListener('input', e => {
+        const key = e.target.dataset.note; const s = loadState(); s[key] = e.target.value; saveState(s);
+      });
+    });
+  }
+
+  function applySearch(){
+    const q = document.getElementById('search').value.toLowerCase().trim();
+    ROOT.querySelectorAll('.task').forEach(el => {
+      if(!q){ el.style.display = ""; return; }
+      const label = el.querySelector('label').innerText.toLowerCase();
+      el.style.display = label.includes(q) ? "" : "none";
+    });
+  }
+  function clearCompleted(){
+    const s = loadState(); DATA.forEach(sec => sec.items.forEach(([id]) => { if(s[id]) delete s[id]; }));
+    saveState(s); render(); applySearch();
+  }
+  function resetAll(){
+    if(confirm("Reset all checks and notes for this page?")){ localStorage.removeItem(STORAGE_KEY); render(); applySearch(); }
+  }
+  function exportState(){
+    const data = localStorage.getItem(STORAGE_KEY) || "{}";
+    const blob = new Blob([data], {type:"application/json"});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+    a.download = PAGE_ID + "-checklist-backup.json"; document.body.appendChild(a); a.click(); a.remove();
+  }
+  function importState(){
+    const inp = document.createElement('input'); inp.type = "file"; inp.accept = "application/json";
+    inp.addEventListener('change', () => {
+      const file = inp.files[0]; if(!file) return;
+      const reader = new FileReader();
+      reader.onload = e => { try { localStorage.setItem(STORAGE_KEY, e.target.result); render(); applySearch(); } catch(err){ alert("Invalid backup file."); } };
+      reader.readAsText(file);
+    });
+    inp.click();
+  }
+
+  document.getElementById('search').addEventListener('input', applySearch);
+  document.getElementById('clearCompleted').addEventListener('click', (e)=>{e.preventDefault(); clearCompleted();});
+  document.getElementById('resetAll').addEventListener('click', (e)=>{e.preventDefault(); resetAll();});
+  document.getElementById('exportBtn').addEventListener('click', (e)=>{e.preventDefault(); exportState();});
+  document.getElementById('importBtn').addEventListener('click', (e)=>{e.preventDefault(); importState();});
+  document.getElementById('year').textContent = new Date().getFullYear();
+  render();
+  </script>
+</body>
+</html>

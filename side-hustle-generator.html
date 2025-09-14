@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Side‑Hustle Ideas Generator — Elizabeth N Exclusives</title>
+  <meta name="description" content="Immediately actionable side‑hustle ideas for Nigeria: filter by skill, budget, mode and category, then grab 3‑day quick‑start plans and pitch scripts.">
+  <style>
+:root{
+  --lavender:#C8B6E2; --blush:#F4C2C2; --green:#A8D5BA; --gold:#D4A017;
+  --ink:#1C1C1C; --muted:#6B7280; --bg:#ffffff; --border:rgba(0,0,0,.08);
+}
+*{box-sizing:border-box} html,body{margin:0;padding:0}
+body{
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  color:var(--ink); background:var(--bg); line-height:1.6;
+  background:
+    radial-gradient(900px 360px at 90% 8%, rgba(168,213,186,.14), transparent 60%),
+    radial-gradient(740px 300px at 8% 92%, rgba(200,182,226,.14), transparent 60%),
+    radial-gradient(680px 280px at 70% 70%, rgba(244,194,194,.14), transparent 60%),
+    linear-gradient(180deg,#fff,#fff);
+}
+.wrap{max-width:1100px;margin:0 auto;padding:24px 20px}
+header.site{
+  position:sticky; top:0; z-index:50;
+  background: linear-gradient(90deg, rgba(200,182,226,.12), rgba(168,213,186,.12));
+  border-bottom:1px solid var(--border);
+  backdrop-filter: blur(6px);
+}
+.site .inner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{font-weight:700}
+.nav a{margin-right:10px;color:var(--ink);text-decoration:none;padding:6px 8px;border-radius:8px}
+.nav a:hover{background:rgba(212,160,23,.14)}
+h1{font-size:34px;margin:12px 0 6px}
+.lead{color:var(--muted); margin:0 0 14px}
+.btn,.ghost{display:inline-block; padding:10px 14px; border-radius:10px; text-decoration:none; font-size:14px}
+.btn{background:var(--ink); color:#fff}
+.ghost{border:1px solid var(--border); color:#1C1C1C; background:#fff}
+.btn:hover{transform:translateY(-1px)}
+.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; margin:18px 0 8px}
+.card{background:#fff;border:1px solid var(--border); border-radius:16px; padding:14px; box-shadow:0 10px 30px rgba(0,0,0,.04)}
+.card h3{margin:8px 0 4px; font-size:18px}
+.card p{margin:0 0 12px; color:#6B7280}
+.badge{display:inline-block; font-size:12px; padding:2px 8px; border-radius:999px; background:rgba(212,160,23,.14); color:#7a5b0b}
+.row{display:flex; gap:10px; flex-wrap:wrap}
+aside.card{position:sticky; top:76px; align-self:start}
+footer.site{border-top:1px solid var(--border); margin-top:28px; padding:14px 0; color:#6B7280; font-size:14px}
+.small{font-size:12px; color:#6B7280}
+input[type="range"]{width:220px}
+input,select{padding:10px 12px; border:1px solid var(--border); border-radius:10px}
+label{font-weight:600}
+.details{border-top:1px dashed rgba(0,0,0,.08); padding-top:8px; margin-top:8px}
+.kv{display:grid; grid-template-columns: 1fr auto; gap:6px; font-size:13px; color:#333}
+.kv b{color:#111}
+hr.sep{border:none; border-top:1px dashed rgba(0,0,0,.12); margin:10px 0}
+@media print{
+  header.site, .controls, .shortlist-actions, .copy, .nav { display:none !important }
+  body{background:#fff}
+  .wrap{max-width:100%; padding:0 8mm}
+  .card{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap inner">
+      <div class="brand">Elizabeth N Exclusives — Side‑Hustle Ideas</div>
+      <nav class="nav">
+        <a href="./side-hustle-generator.html">Generator</a>
+        <a href="./side-hustle-kits.html">Quick‑Start Kits</a>
+      </nav>
+      <div class="row copy">
+        <span class="small">Support: <a href="mailto:lizukandu@gmail.com">lizukandu@gmail.com</a></span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <h1>Immediately Actionable Ideas</h1>
+    <p class="lead">Set your skills, budget, and mode. Get ideas with a <strong>3‑day quick‑start plan</strong>, a <strong>starter script</strong>, and <strong>starter assets</strong> — then add favourites to your shortlist.</p>
+
+    <section class="card controls">
+      <div class="row">
+        <label>Skill keyword<br><input id="skill" placeholder="e.g., design, writing, cooking"/></label>
+        <label>Category<br>
+          <select id="category">
+            <option value="">Any</option>
+            <option>Service</option><option>Product</option><option>Content</option><option>Agriculture</option><option>Education</option>
+          </select>
+        </label>
+        <label>Mode<br>
+          <select id="mode">
+            <option value="">Any</option><option>Online</option><option>Offline</option><option>Mixed</option>
+          </select>
+        </label>
+        <label>Max startup budget (NGN)<br>
+          <input type="range" id="budget" min="0" max="100000" step="5000" value="50000">
+          <div class="small">≤ <span id="budgetVal">₦50,000</span></div>
+        </label>
+        <label>Time available (hrs/week)<br>
+          <select id="hours">
+            <option value="">Any</option><option value="low">≤ 5 hrs</option><option value="med">≤ 15 hrs</option><option value="high">≤ 25 hrs</option>
+          </select>
+        </label>
+      </div>
+      <div class="row">
+        <a class="ghost" href="#" id="reset">Reset</a>
+        <a class="btn" href="#" id="exportShortlist">Download shortlist (CSV)</a>
+      </div>
+    </section>
+
+    <section class="row">
+      <div style="flex:1">
+        <div class="small">Showing <span id="count">0</span> matches</div>
+        <div class="grid" id="results"></div>
+      </div>
+      <aside class="card" style="min-width:280px" id="shortlistCard">
+        <h3>Shortlist</h3>
+        <p class="small">Your saved picks — keep it to 3 for focus.</p>
+        <ul id="shortlist" class="small" style="padding-left:18px"></ul>
+        <div class="shortlist-actions row">
+          <a class="ghost" href="#" id="clearShortlist">Clear</a>
+          <a class="ghost" href="./side-hustle-kits.html">Open Quick‑Start Kits →</a>
+        </div>
+      </aside>
+    </section>
+
+    <footer class="site"><div class="wrap">&copy; <span id="year"></span> Elizabeth N Exclusives Market Hub</div></footer>
+  </main>
+
+  <script>
+  const IDEAS = [{"id": "insta_agency", "idea": "Instagram Mini\u2011Agency", "description": "Create and manage simple social posts for SMEs (content + basic design).", "mode": "Online", "category": "Service", "startup": 40000, "time": "Medium", "skills": ["social media", "canva", "copywriting"], "assets": ["smartphone", "laptop", "internet"], "monetization": "Monthly retainer", "price": "\u20a640k\u2013\u20a6120k/mo per client (tiered)", "script": "Hi [Name] \u2014 I love what you\u2019re doing at [Business]. I mocked up 3 post ideas for your page. If helpful, I can run a simple content plan for 30 days so you stay consistent. Would you like a 10\u2011minute WhatsApp call to review? \u2014 Elizabeth", "day1": "Pick one niche (e.g., salons, cafes). Make 3 sample posts in Canva.", "day2": "Create a 30\u2011day content outline + pricing (2 tiers).", "day3": "Pitch 10 local SMEs via WhatsApp/IG DMs; book 2 discovery calls.", "notes": "Use WhatsApp Business for quick replies + a mini catalog."}, {"id": "meal_prep_boxes", "idea": "Food Prep Boxes", "description": "Prepare weekly prepped ingredients for 2\u20133 meals for busy families.", "mode": "Mixed", "category": "Product", "startup": 60000, "time": "High", "skills": ["cooking", "food safety", "sourcing"], "assets": ["kitchen", "fridge", "smartphone"], "monetization": "Weekly subscription", "price": "\u20a612k\u2013\u20a625k per box depending on portions", "script": "Hello [Name], would ready\u2011to\u2011cook boxes for two dinners a week help? I handle shopping and pre\u2011prep; you get fresh ingredients + a 15\u2011min recipe. I\u2019m piloting with 5 families next week \u2014 want in?", "day1": "Define 3 menus; calculate costs; set delivery day.", "day2": "Source from reliable markets; prep hygienically; label clearly.", "day3": "Pilot with 3\u20135 families; collect feedback; adjust portions/price.", "notes": "Follow basic food hygiene and labeling best practices."}, {"id": "thrift_curator", "idea": "Thrift Curation (IG/WhatsApp)", "description": "Curate and resell quality thrift fashion with styled photos.", "mode": "Mixed", "category": "Product", "startup": 30000, "time": "Medium", "skills": ["sourcing", "photography", "sales"], "assets": ["smartphone", "internet"], "monetization": "Margin per item", "price": "30\u201360% markup; bundle deals", "script": "Hi! I curate clean, stylish thrift pieces in sizes [X\u2013Y]. I post drops twice a week and keep holds for 24 hrs. Want me to send today\u2019s top 5?", "day1": "Pick a style niche; define sizes; set return policy.", "day2": "Shoot 20 items with consistent backgrounds; price and tag.", "day3": "Post first drop; share to WhatsApp statuses; offer bundle discount.", "notes": "Offer pickup points on weekends; track inventory."}, {"id": "home_tutor", "idea": "Home Tutoring (Primary/JS)", "description": "Math/English/homework support for school\u2011age kids.", "mode": "Offline", "category": "Education", "startup": 10000, "time": "Medium", "skills": ["teaching", "communication"], "assets": ["smartphone", "transport"], "monetization": "Hourly sessions", "price": "\u20a64k\u2013\u20a610k/hr depending on level/location", "script": "Good day, I help pupils improve in [subject]. I run a 4\u2011week plan with weekly feedback for parents. Could I share a sample lesson outline?", "day1": "Draft 4\u2011week plan; create simple assessment sheet.", "day2": "Print flyers; list estate/parent groups; set schedule.", "day3": "Offer first lesson at a discount; collect testimonials.", "notes": "Partner with estates/parent communities for referrals."}, {"id": "digital_templates", "idea": "Digital Templates", "description": "Sell planners and trackers on Selar/Paystack storefronts.", "mode": "Online", "category": "Content", "startup": 0, "time": "Low", "skills": ["design", "spreadsheets", "writing"], "assets": ["laptop", "internet"], "monetization": "One\u2011time product sales", "price": "\u20a62k\u2013\u20a67k per template", "script": "Hi [Name], I built a simple [template] that saves you time. Would you like a free sample page? If you love it, the full version is \u20a6[price].", "day1": "List 3 problems to solve; outline 2\u20133 templates.", "day2": "Design MVP in Google Sheets/Canva; export PDF.", "day3": "Set up storefront; post mockups; share link in 5 groups.", "notes": "Localize currency and examples for Nigeria."}, {"id": "cv_linkedin", "idea": "CV/LinkedIn Revamp", "description": "Rewrite CVs and optimize LinkedIn for graduates and job seekers.", "mode": "Online", "category": "Service", "startup": 0, "time": "Low", "skills": ["writing", "career", "editing"], "assets": ["laptop", "internet"], "monetization": "Package pricing", "price": "\u20a610k\u2013\u20a635k per package", "script": "Hi [Name], I help candidates upgrade CVs & LinkedIn so recruiters notice. Would you like a quick audit voice note (free)?", "day1": "Collect 3 before/after samples; define 2 packages.", "day2": "Create intake form; craft delivery timeline & revisions.", "day3": "Pitch to NYSC/grad groups; book 3 audits; upsell full revamp.", "notes": "Keep a simple checklist to streamline delivery."}, {"id": "event_mc", "idea": "Event Weekend MC", "description": "Host small events and birthdays on weekends.", "mode": "Offline", "category": "Service", "startup": 15000, "time": "Medium", "skills": ["public speaking", "hosting"], "assets": ["smartphone"], "monetization": "Per event fee", "price": "\u20a630k\u2013\u20a6120k per event", "script": "Hello [Planner/Host], I MC intimate events with a clean, fun style. I can share a 2\u2011minute demo and a simple agenda plan. When\u2019s your next event?", "day1": "Draft a 60\u2011min event agenda template; record intro video.", "day2": "Design 1\u2011page rate card; list planners to contact.", "day3": "Send 15 intros; confirm first booking; request referrals.", "notes": "Capture testimonials and photos for social proof."}, {"id": "phone_repairs", "idea": "Mobile Phone Repairs", "description": "Offer screen/battery swaps for common smartphones.", "mode": "Offline", "category": "Service", "startup": 50000, "time": "High", "skills": ["hardware", "troubleshooting"], "assets": ["toolkit", "smartphone"], "monetization": "Per job fee", "price": "\u20a68k\u2013\u20a635k typical jobs", "script": "Hi, I do on\u2011site screen & battery swaps for common phone models with 7\u2011day warranty. Need help with your device?", "day1": "Study 3 popular models; price parts; list tools to buy.", "day2": "Practice on a demo device; set safety checklist.", "day3": "Post estate flyers; offer 10% off first 10 repairs.", "notes": "Work near busy bus stops/estates; manage e\u2011waste responsibly."}, {"id": "agro_storage", "idea": "Basic Agro Storage Advice", "description": "Share simple grain storage and preservation tips for locals.", "mode": "Offline", "category": "Agriculture", "startup": 20000, "time": "Low", "skills": ["agriculture", "advisory"], "assets": ["smartphone", "transport"], "monetization": "Per session fee", "price": "\u20a65k\u2013\u20a615k per session", "script": "Good day, I run a short session on safe grain storage that prevents losses. Can I schedule a 30\u2011min demo for your group?", "day1": "Create 1\u2011page guide; pick 3 markets/co\u2011ops.", "day2": "Book demo times; print handouts.", "day3": "Deliver 2 pilots; gather questions; refine content.", "notes": "Consider partnering with local cooperatives."}, {"id": "fitness_walk", "idea": "Fitness Walk Group", "description": "Paid weekly group walks with basic wellness plan.", "mode": "Offline", "category": "Service", "startup": 10000, "time": "Low", "skills": ["fitness", "community"], "assets": ["smartphone"], "monetization": "Monthly subscription", "price": "\u20a65k\u2013\u20a612k/mo per person", "script": "Hi neighbours! I\u2019m starting a safe, guided evening walk every Sat with a simple weekly plan. Want to join the pilot this weekend?", "day1": "Design route; set safety rules; pick schedule.", "day2": "Create WhatsApp group; share waiver note.", "day3": "Host first walk; collect feedback; announce monthly plan.", "notes": "Target estates after work; keep routes consistent."}, {"id": "kids_culture_kits", "idea": "Kids Culture Kits", "description": "Monthly Nigerian culture activity kits for kids.", "mode": "Mixed", "category": "Product", "startup": 70000, "time": "Medium", "skills": ["curriculum", "crafts", "storytelling"], "assets": ["printer", "kitchen", "smartphone"], "monetization": "Monthly subscription", "price": "\u20a615k\u2013\u20a635k per kit", "script": "Hi [Parent], I make fun monthly activity kits that teach Nigerian culture with stories and crafts. Want a sample page?", "day1": "Prototype 1 kit; list materials; pricing.", "day2": "Test with 3 families; gather feedback.", "day3": "Open pre\u2011orders; set subscription schedule.", "notes": "Include Yoruba/Igbo/Hausa basics; ensure safe materials."}, {"id": "suya_spice", "idea": "Suya Spice Blend", "description": "Package and sell a custom suya spice mix.", "mode": "Mixed", "category": "Product", "startup": 25000, "time": "Low", "skills": ["cooking", "branding"], "assets": ["kitchen", "printer"], "monetization": "Margin per jar/pack", "price": "\u20a61.5k\u2013\u20a63.5k per pack", "script": "Hello! I\u2019ve perfected a suya spice blend \u2014 aromatic and balanced. Would you like a tasting sachet?", "day1": "Test final recipe; cost packaging; design labels.", "day2": "Package 50 starter packs; photograph products.", "day3": "Sell to friends/market; offer combo deals with grills.", "notes": "Follow basic food\u2011safe handling and labeling."}, {"id": "yt_faceless", "idea": "YouTube Faceless Channel", "description": "Create voiceover tutorials/slides without showing your face.", "mode": "Online", "category": "Content", "startup": 0, "time": "Medium", "skills": ["script", "editing", "voiceover"], "assets": ["laptop", "internet"], "monetization": "Ads & affiliate links", "price": "Start with 3\u20135 videos/week; track RPM", "script": "I\u2019m launching a practical channel on [topic] with 5 short videos weekly. What\u2019s one problem you want solved this week?", "day1": "Pick niche; plan 5 scripts; design template.", "day2": "Batch record voiceovers; assemble videos.", "day3": "Publish and cross\u2011post to TikTok/IG; ask for feedback.", "notes": "Be consistent; keep videos short and clear."}];
+  const resultsEl = document.getElementById('results');
+  const countEl = document.getElementById('count');
+  const budgetEl = document.getElementById('budget');
+  const budgetVal = document.getElementById('budgetVal');
+  const modeEl = document.getElementById('mode');
+  const catEl = document.getElementById('category');
+  const skillEl = document.getElementById('skill');
+  const hoursEl = document.getElementById('hours');
+  const shortlistEl = document.getElementById('shortlist');
+  const SL_KEY = "enx_side_hustle_shortlist_v1";
+
+  const timeMap = {{low: "Low", med:"Medium", high:"High"}};
+
+  function formatNaira(n){{ return "₦" + n.toLocaleString(); }}
+  function updateBudget(){{ budgetVal.textContent = "₦" + Number(budgetEl.value).toLocaleString(); }}
+
+  function loadShortlist(){{ try{{return JSON.parse(localStorage.getItem(SL_KEY))||[]}}catch(_ ){{return []}} }}
+  function saveShortlist(v){{ localStorage.setItem(SL_KEY, JSON.stringify(v)); }}
+
+  function score(idea, q){{
+    let s = 0;
+    if(idea.startup <= q.budget) s += 1;
+    if(!q.mode || idea.mode === q.mode) s += 1;
+    if(!q.category || idea.category === q.category) s += 1;
+    if(q.skill){{
+      const blob = (idea.description + " " + idea.skills.join(" ")).toLowerCase();
+      if(blob.includes(q.skill.toLowerCase())) s += 2;
+    }}
+    if(q.hours){{
+      const want = timeMap[q.hours];
+      if(idea.time === want || (want==="High" && idea.time!=="Low")) s += 1;
+    }}
+    return s;
+  }}
+
+  function filter(){{
+    const q = {{ budget:Number(budgetEl.value), mode:modeEl.value, category:catEl.value, skill:skillEl.value.trim(), hours:hoursEl.value }};
+    const ranked = IDEAS
+      .filter(i => i.startup <= q.budget)
+      .filter(i => !q.mode || i.mode===q.mode)
+      .filter(i => !q.category || i.category===q.category)
+      .filter(i => !q.skill || (i.description + " " + i.skills.join(" ")).toLowerCase().includes(q.skill.toLowerCase()))
+      .filter(i => !q.hours || i.time === timeMap[q.hours] || (q.hours==="high" && i.time!=="Low"))
+      .map(i => [i, score(i,q)])
+      .sort((a,b)=>b[1]-a[1])
+      .map(t=>t[0]);
+
+    render(ranked);
+  }}
+
+  function render(list){{
+    resultsEl.innerHTML = "";
+    countEl.textContent = list.length;
+    const sl = loadShortlist();
+
+    list.forEach(i => {{
+      const card = document.createElement('article'); card.className = "card";
+      card.innerHTML = `
+        <div class="row" style="justify-content:space-between;align-items:center">
+          <span class="badge">${{i.category}} • ${{i.mode}}</span>
+          <span class="small">${{i.time}} time • Startup ≤ ${{formatNaira(i.startup)}} </span>
+        </div>
+        <h3>${{i.idea}}</h3>
+        <p>${{i.description}}</p>
+        <div class="kv">
+          <span><b>Monetization</b></span><span>${{i.monetization}}</span>
+          <span><b>Starter price</b></span><span>${{i.price}}</span>
+          <span><b>Starter assets</b></span><span>${{i.assets.join(", ")}}</span>
+        </div>
+        <div class="details">
+          <p><b>3‑Day Quick‑Start</b></p>
+          <ol class="small" style="margin-top:-4px">
+            <li>${{i.day1}}</li>
+            <li>${{i.day2}}</li>
+            <li>${{i.day3}}</li>
+          </ol>
+          <hr class="sep"/>
+          <p class="small"><b>Pitch script:</b> <span id="script_${{i.id}}">${{i.script}}</span></p>
+          <div class="row">
+            <a class="ghost" href="#" data-copy="${{i.id}}">Copy pitch</a>
+            <a class="ghost" href="./side-hustle-kits.html#${{i.id}}">Open quick kit</a>
+            <a class="btn" href="#" data-add="${{i.id}}">${{sl.includes(i.id) ? "Added ✓" : "Add to shortlist"}}</a>
+          </div>
+          <p class="small" style="margin-top:8px">${{i.notes}}</p>
+        </div>
+      `;
+      resultsEl.appendChild(card);
+    }});
+
+    // Bind buttons
+    resultsEl.querySelectorAll('[data-copy]').forEach(btn => {{
+      btn.addEventListener('click', e => {{
+        e.preventDefault();
+        const id = btn.getAttribute('data-copy');
+        const txt = document.getElementById('script_'+id).innerText;
+        navigator.clipboard.writeText(txt);
+        btn.textContent = "Copied ✓";
+        setTimeout(()=>btn.textContent="Copy pitch",1200);
+      }});
+    }});
+    resultsEl.querySelectorAll('[data-add]').forEach(btn => {{
+      btn.addEventListener('click', e => {{
+        e.preventDefault();
+        const id = btn.getAttribute('data-add');
+        const current = loadShortlist();
+        if(!current.includes(id)) current.push(id);
+        saveShortlist(current);
+        btn.textContent = "Added ✓";
+        renderShortlist();
+      }});
+    }});
+  }}
+
+  function renderShortlist(){{
+    const sl = loadShortlist();
+    shortlistEl.innerHTML = "";
+    if(sl.length===0){{ shortlistEl.innerHTML = "<li>Nothing yet. Add 1–3 ideas to stay focused.</li>"; return; }}
+    sl.slice(0,10).forEach(id => {{
+      const i = IDEAS.find(x=>x.id===id);
+      if(!i) return;
+      const li = document.createElement('li');
+      li.innerHTML = `<b>${{i.idea}}</b> — <span class="small">${{i.category}} • ${{i.mode}}</span> <a href="#" data-rm="${{i.id}}" class="small">[remove]</a>`;
+      shortlistEl.appendChild(li);
+    }});
+    shortlistEl.querySelectorAll('[data-rm]').forEach(a => a.addEventListener('click', e => {{
+      e.preventDefault();
+      const id = a.getAttribute('data-rm');
+      saveShortlist(loadShortlist().filter(x=>x!==id));
+      renderShortlist();
+      filter();
+    }}));
+  }}
+
+  function downloadCSV(){{
+    const sl = loadShortlist();
+    const rows = [["Idea","Category","Mode","StartupNGN","Time","Monetization","StarterPrice","Assets","Day1","Day2","Day3","Script","Notes"]];
+    sl.forEach(id => {{
+      const i = IDEAS.find(x=>x.id===id); if(!i) return;
+      rows.push([i.idea,i.category,i.mode,i.startup,i.time,i.monetization,i.price,i.assets.join("; "),i.day1,i.day2,i.day3,i.script,i.notes]);
+    }});
+    const csv = rows.map(r => r.map(v => `"${{String(v).replace(/"/g,'""')}}"`).join(",")).join("\n");
+    const blob = new Blob([csv], {{type:"text/csv"}});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = "side-hustle-shortlist.csv"; a.click();
+  }}
+
+  // Events
+  document.getElementById('exportShortlist').addEventListener('click', e => {{ e.preventDefault(); downloadCSV(); }});
+  document.getElementById('clearShortlist').addEventListener('click', e => {{ e.preventDefault(); localStorage.removeItem(SL_KEY); renderShortlist(); filter(); }});
+  document.getElementById('reset').addEventListener('click', e => {{
+    e.preventDefault();
+    skillEl.value = ""; catEl.value=""; modeEl.value=""; hoursEl.value="";
+    budgetEl.value = 50000; updateBudget(); filter();
+  }});
+  [budgetEl,modeEl,catEl,skillEl,hoursEl].forEach(el => el.addEventListener('input', filter));
+
+  // Init
+  document.getElementById('year').textContent = new Date().getFullYear();
+  updateBudget(); renderShortlist(); filter();
+  </script>
+</body>
+</html>

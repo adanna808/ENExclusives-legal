@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Complete Returnee Checklist — Elizabeth N Exclusives</title>
+  <meta name="description" content="A comprehensive, printable returnee checklist covering documents, identity, finance, housing, health, connectivity, logistics, work, community, safety, and first weeks in-country.">
+  <style>
+    :root{
+      --lavender:#C8B6E2; --blush:#F4C2C2; --green:#A8D5BA; --gold:#D4A017;
+      --ink:#1C1C1C; --muted:#6B7280; --bg:#ffffff;
+      --card: #ffffff; --border: rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--ink); background: var(--bg); line-height:1.6;
+      background:
+        radial-gradient(900px 360px at 90% 8%, rgba(168,213,186,.18), transparent 60%),
+        radial-gradient(740px 300px at 8% 92%, rgba(200,182,226,.18), transparent 60%),
+        radial-gradient(680px 280px at 70% 70%, rgba(244,194,194,.18), transparent 60%),
+        linear-gradient(180deg,#fff,#fff);
+    }
+    .wrap{max-width:1100px;margin:0 auto;padding:24px 20px}
+    header.site{
+      position:sticky; top:0; z-index:40;
+      background: linear-gradient(90deg, rgba(200,182,226,.12), rgba(168,213,186,.12));
+      backdrop-filter: blur(6px);
+      border-bottom:1px solid var(--border);
+    }
+    .site .inner{display:flex;align-items:center;justify-content:space-between}
+    .brand{font-weight:700}
+    .actions{display:flex;gap:10px;flex-wrap:wrap}
+    .btn,.ghost{
+      display:inline-block; padding:10px 14px; border-radius:10px; text-decoration:none;
+      font-size:14px;
+    }
+    .btn{background:var(--ink); color:#fff}
+    .ghost{border:1px solid var(--border); color:var(--ink); background:#fff}
+    .btn:hover{transform:translateY(-1px)}
+    h1{font-size:36px;margin:6px 0}
+    .lead{color:var(--muted); margin-top:0}
+    .tools{display:flex;flex-wrap:wrap; gap:10px; margin:14px 0 22px}
+    .tools input[type="search"]{padding:10px 12px; border:1px solid var(--border); border-radius:10px; min-width:240px}
+    .progress{
+      margin:16px 0 24px; padding:14px; border:1px solid var(--border); border-radius:16px; background:#fff;
+      display:grid; gap:10px;
+    }
+    .bar{height:10px; background:rgba(0,0,0,.06); border-radius:999px; overflow:hidden}
+    .bar>i{display:block; height:100%; background:linear-gradient(90deg,var(--lavender),var(--green)); width:0%}
+    .grid{
+      display:grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap:14px;
+    }
+    .card{
+      background:var(--card); border:1px solid var(--border); border-radius:16px; padding:14px;
+      box-shadow:0 10px 30px rgba(0,0,0,.04);
+    }
+    .card h3{margin:4px 0 8px; font-size:18px}
+    .meta{display:flex; justify-content:space-between; color:var(--muted); font-size:13px}
+    ul.tasks{list-style:none;padding:0;margin:10px 0 0}
+    .task{display:flex; gap:10px; align-items:flex-start; padding:6px 0; border-bottom:1px dashed rgba(0,0,0,.06)}
+    .task:last-child{border-bottom:0}
+    .task input[type="checkbox"]{margin-top:4px; width:18px; height:18px}
+    .task label{flex:1}
+    .task small{display:block; color:var(--muted)}
+    .badge{display:inline-block; font-size:12px; padding:2px 8px; border-radius:999px; background:rgba(212,160,23,.14); color:#7a5b0b}
+    .note{margin-top:10px}
+    .note textarea{width:100%; min-height:60px; padding:10px; border:1px solid var(--border); border-radius:8px}
+    footer.site{border-top:1px solid var(--border); margin-top:28px; padding-top:12px; color:var(--muted); font-size:14px}
+
+    @media print{
+      header.site, .tools, .actions, .note textarea { display:none !important; }
+      body{background:#fff}
+      .card{page-break-inside:avoid}
+      .wrap{max-width:100%; padding:0 8mm}
+    }
+  </style>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap inner">
+      <div class="brand">Elizabeth N Exclusives — Returnee Toolkit</div>
+      <div class="actions">
+        <a class="ghost" href="#" id="exportBtn">Export</a>
+        <a class="ghost" href="#" id="importBtn">Import</a>
+        <a class="btn" href="#" onclick="window.print()">Print</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <h1>Complete Returnee Checklist</h1>
+    <p class="lead">Tick items as you go. Your progress is saved in your browser (local only). Use <strong>Export</strong> to back up and <strong>Import</strong> to restore.</p>
+
+    <div class="tools">
+      <input type="search" id="search" placeholder="Filter tasks (e.g., ‘NIN’, ‘bank’, ‘SIM’)"/>
+      <a class="ghost" href="#" id="clearCompleted">Clear completed</a>
+      <a class="ghost" href="#" id="resetAll">Reset all</a>
+    </div>
+
+    <section class="progress">
+      <div class="meta"><span class="badge">Overall</span> <span id="overallPct">0% complete</span></div>
+      <div class="bar"><i id="overallBar" style="width:0%"></i></div>
+    </section>
+
+    <section class="grid" id="sections"></section>
+
+    <footer class="site">
+      <p>&copy; <span id="year"></span> Elizabeth N Exclusives Market Hub — Support: <a href="mailto:lizukandu@gmail.com">lizukandu@gmail.com</a></p>
+    </footer>
+  </main>
+
+  <script>
+  const DATA = [
+    {id:"documents", title:"Documents", noteKey:"note_documents", items:[
+      ["passport_validity","Check passport validity (≥ 6 months)","Renew if expiring soon; scan and store in cloud."],
+      ["gather_docs","Gather key documents","Birth/marriage certificates, transcripts, licenses; make certified copies."],
+      ["medical_records","Medical & vaccination records","Yellow fever card; prescriptions list; allergy notes."],
+      ["police_clear","Police clearance (if required)","Confirm requirement based on your situation."],
+      ["drivers","Driver’s licence (convert/renew)","Check process and appointments."],
+      ["digital_backup","Digital backup of all docs","Scan to PDF, organize by folder, share with a trusted contact."]
+    ]},
+    {id:"identity", title:"Identity", noteKey:"note_identity", items:[
+      ["nin","Plan for NIN enrollment/verification","Locate nearest enrollment center; bring required IDs."],
+      ["bvn","BVN creation/reactivation","Book bank visit with ID and phone number."],
+      ["sim_reg","SIM registration","MTN/Airtel/Glo/9mobile; link NIN; keep spare SIM."]
+    ]},
+    {id:"finance", title:"Finance", noteKey:"note_finance", items:[
+      ["bank_acc","Open/verify local bank account","Shortlist 2–3 banks; gather proof of address & ID."],
+      ["money_routes","Set up money transfer routes","Choose providers; test small transfer; note fees & timing."],
+      ["cards_atm","Card/ATM & mobile banking","Activate cards; set USSD; install bank apps."],
+      ["emergency_fund","Emergency fund in NGN","Target 1–3 months of core expenses."],
+      ["tax_tin","Tax ID & compliance","TIN record; keep receipts for deductions."]
+    ]},
+    {id:"housing", title:"Housing", noteKey:"note_housing", items:[
+      ["short_stay","Book short‑term stay","1–4 weeks near target neighborhood; flexible cancellation."],
+      ["agent_verify","Agent shortlist & verification","Ask for references; avoid cash; insist on receipts & agreements."],
+      ["lease_review","Lease review by professional","Review tenancy terms, fees, and inventory list."],
+      ["utilities","Utility setup plan","Power (meter/inverter), water, waste, internet options."],
+      ["neighbourhood","Neighborhood research","Commute, safety, markets, noise; visit at different times."]
+    ]},
+    {id:"health", title:"Health", noteKey:"note_health", items:[
+      ["hmo","Choose health insurance/HMO","Shortlist plans; confirm hospital network near you."],
+      ["clinic","Register with a clinic/hospital","Carry ID; understand emergency procedures."],
+      ["meds","Medication continuity plan","90‑day supply; local equivalents list; cold chain if needed."],
+      ["emergency","Emergency numbers list","Nearest hospitals and key contacts."]
+    ]},
+    {id:"connectivity", title:"Connectivity", noteKey:"note_connectivity", items:[
+      ["sim_pick","Pick primary & backup SIMs","Compare coverage; keep backup SIM/MiFi."],
+      ["data_plan","Choose data plan & backup","Primary + backup (MiFi or second SIM)."],
+      ["wa_business","WhatsApp Business setup","Greeting message, quick replies, catalog if applicable."],
+      ["device_unlock","Device unlocking & adapters","Ensure phones are unlocked; carry travel adapters."]
+    ]},
+    {id:"logistics", title:"Logistics", noteKey:"note_logistics", items:[
+      ["ship_agent","Select a shipping/clearing agent","Get written quotes; timelines; customs documentation list."],
+      ["inventory","Create shipment inventory","Box #, item list, value estimates for customs."],
+      ["airport_pickup","Airport pickup & early transport","Trusted driver; ride‑hailing app setup; safety rules."],
+      ["local_apps","Install local mobility & maps","Ride‑hailing, offline maps; save home/clinic/office locations."]
+    ]},
+    {id:"work", title:"Work & Business", noteKey:"note_work", items:[
+      ["cac","Register business (if applicable)","Name search, CAC registration, TIN; keep receipts."],
+      ["payments","Payments toolkit","Payment links/processors; receipts templates; POS if needed."],
+      ["cv_linkedin","CV/LinkedIn local update","Adapt for local market; references; portfolio."],
+      ["networking","Networking plan","Professional groups; mentors; events."]
+    ]},
+    {id:"community", title:"Community & Family", noteKey:"note_community", items:[
+      ["groups","Join local groups & networks","Faith, professional, parenting, hobby groups."],
+      ["schools","School search (if applicable)","Admissions timelines; uniform/books; transport."],
+      ["services","Essential local services","Tailor, market days, supermarkets, pharmacies."]
+    ]},
+    {id:"safety", title:"Safety & Resilience", noteKey:"note_safety", items:[
+      ["contacts","Emergency contacts list","Local emergency lines; trusted contacts; nearest hospitals."],
+      ["security","Home & personal security basics","Low‑profile routines; duplicate keys; lighting; neighbours."],
+      ["power_backup","Power backup plan","Inverter/generator schedule; fuel; surge protectors."]
+    ]},
+    {id:"timeline", title:"First Weeks Timeline", noteKey:"note_timeline", items:[
+      ["d1_3","Days 1–3","SIM, initial cash/ATM, rides, essential groceries, clinic registration."],
+      ["w1","Week 1","Bank KYC, short‑term stay settled, utilities research, transport familiarization."],
+      ["w2","Week 2","Neighborhood visits, agent verifications, shortlist housing, set up HMO."],
+      ["w3_4","Weeks 3–4","Sign lease, move‑in inventory, ship items, set up power/internet."]
+    ]}
+  ];
+
+  const ROOT = document.getElementById('sections');
+  const STORAGE_KEY = "enx_returnee_checklist_v1";
+
+  function loadState(){ try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch(_) { return {}; } }
+  function saveState(s){ localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); }
+  function percent(n,d){ return d? Math.round((n/d)*100):0; }
+
+  function render(){
+    const state = loadState();
+    ROOT.innerHTML = "";
+    let total=0, done=0;
+
+    DATA.forEach(section => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      const items = section.items;
+      const sectionDone = items.filter(([id]) => state[id]).length;
+      const sectionPct = percent(sectionDone, items.length);
+      done += sectionDone; total += items.length;
+
+      card.innerHTML = `
+        <div class="meta"><span class="badge">${section.title}</span><span>${sectionPct}%</span></div>
+        <ul class="tasks">
+          ${items.map(([id, title, hint]) => `
+            <li class="task" data-id="${id}">
+              <input type="checkbox" id="${id}" ${state[id] ? 'checked' : ''}>
+              <label for="${id}">${title}${hint?`<small>${hint}</small>`:''}</label>
+            </li>
+          `).join('')}
+        </ul>
+        <div class="note">
+          <label><small>Notes (${section.title})</small></label>
+          <textarea data-note="${section.noteKey}" placeholder="Add any notes or contacts...">${state[section.noteKey]||""}</textarea>
+        </div>
+      `;
+      ROOT.appendChild(card);
+    });
+
+    const overallPct = percent(done, total);
+    document.getElementById('overallPct').textContent = `${overallPct}% complete`;
+    document.getElementById('overallBar').style.width = `${overallPct}%`;
+
+    ROOT.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      cb.addEventListener('change', e => {
+        const s = loadState();
+        s[e.target.id] = e.target.checked;
+        saveState(s);
+        render();
+        applySearch();
+      });
+    });
+    ROOT.querySelectorAll('textarea').forEach(ta => {
+      ta.addEventListener('input', e => {
+        const key = e.target.dataset.note;
+        const s = loadState();
+        s[key] = e.target.value;
+        saveState(s);
+      });
+    });
+  }
+
+  function applySearch(){
+    const q = document.getElementById('search').value.toLowerCase().trim();
+    ROOT.querySelectorAll('.task').forEach(el => {
+      if(!q){ el.style.display = ""; return; }
+      const label = el.querySelector('label').innerText.toLowerCase();
+      el.style.display = label.includes(q) ? "" : "none";
+    });
+  }
+
+  function clearCompleted(){
+    const s = loadState();
+    DATA.forEach(sec => sec.items.forEach(([id]) => { if(s[id]) delete s[id]; }));
+    saveState(s); render(); applySearch();
+  }
+
+  function resetAll(){
+    if(confirm("Reset all checks and notes? This cannot be undone.")){
+      localStorage.removeItem(STORAGE_KEY);
+      render(); applySearch();
+    }
+  }
+
+  function exportState(){
+    const data = localStorage.getItem(STORAGE_KEY) || "{}";
+    const blob = new Blob([data], {type:"application/json"});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = "returnee-checklist-backup.json";
+    document.body.appendChild(a); a.click(); a.remove();
+  }
+
+  function importState(){
+    const inp = document.createElement('input');
+    inp.type = "file"; inp.accept = "application/json";
+    inp.addEventListener('change', () => {
+      const file = inp.files[0]; if(!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        try {
+          const obj = JSON.parse(e.target.result);
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(obj));
+          render(); applySearch();
+        } catch(err){ alert("Invalid backup file."); }
+      };
+      reader.readAsText(file);
+    });
+    inp.click();
+  }
+
+  document.getElementById('search').addEventListener('input', applySearch);
+  document.getElementById('clearCompleted').addEventListener('click', (e)=>{e.preventDefault(); clearCompleted();});
+  document.getElementById('resetAll').addEventListener('click', (e)=>{e.preventDefault(); resetAll();});
+  document.getElementById('exportBtn').addEventListener('click', (e)=>{e.preventDefault(); exportState();});
+  document.getElementById('importBtn').addEventListener('click', (e)=>{e.preventDefault(); importState();});
+  document.getElementById('year').textContent = new Date().getFullYear();
+  render();
+  </script>
+</body>
+</html>
