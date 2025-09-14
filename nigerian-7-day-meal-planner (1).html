@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Nigerian 7‑Day Meal Planner — Elizabeth N Exclusives</title>
+  <meta name="description" content="A practical 7‑day Nigerian meal plan with breakfast, lunch, dinner and snacks — plus auto‑generated shopping list with quantities.">
+  <style>
+:root{
+  --lavender:#C8B6E2; --blush:#F4C2C2; --green:#A8D5BA; --gold:#D4A017;
+  --ink:#1C1C1C; --muted:#6B7280; --bg:#ffffff; --border:rgba(0,0,0,.08);
+}
+*{box-sizing:border-box} html,body{margin:0;padding:0}
+body{
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  color:var(--ink); background:var(--bg); line-height:1.6;
+  background:
+    radial-gradient(900px 360px at 90% 8%, rgba(168,213,186,.14), transparent 60%),
+    radial-gradient(740px 300px at 8% 92%, rgba(200,182,226,.14), transparent 60%),
+    radial-gradient(680px 280px at 70% 70%, rgba(244,194,194,.14), transparent 60%),
+    linear-gradient(180deg,#fff,#fff);
+}
+.wrap{max-width:1100px;margin:0 auto;padding:24px 20px}
+header.site{
+  position:sticky; top:0; z-index:50;
+  background: linear-gradient(90deg, rgba(200,182,226,.12), rgba(168,213,186,.12));
+  border-bottom:1px solid var(--border);
+  backdrop-filter: blur(6px);
+}
+.site .inner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{font-weight:700}
+h1{font-size:34px;margin:12px 0 6px}
+.lead{color:var(--muted); margin:0 0 14px}
+.controls{display:flex;gap:10px;flex-wrap:wrap; align-items:flex-end; margin:14px 0 18px}
+.controls label{display:flex; flex-direction:column; gap:6px; font-weight:600}
+input,select{padding:10px 12px; border:1px solid var(--border); border-radius:10px}
+.btn,.ghost{display:inline-block; padding:10px 14px; border-radius:10px; text-decoration:none; font-size:14px}
+.btn{background:var(--ink); color:#fff}
+.ghost{border:1px solid var(--border); color:#1C1C1C; background:#fff}
+.btn:hover{transform:translateY(-1px)}
+.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px}
+.card{background:#fff; border:1px solid var(--border); border-radius:16px; padding:14px; box-shadow:0 10px 30px rgba(0,0,0,.04)}
+.card h3{margin:8px 0 4px; font-size:18px}
+.card p{margin:0 0 10px; color:#6B7280}
+.badge{display:inline-block; font-size:12px; padding:2px 8px; border-radius:999px; background:rgba(212,160,23,.14); color:#7a5b0b}
+.meal{border-top:1px dashed rgba(0,0,0,.1); padding-top:8px; margin-top:8px}
+details{border:1px dashed rgba(0,0,0,.08); border-radius:10px; padding:8px 10px; background:#fff}
+summary{cursor:pointer; font-weight:600}
+.kv{display:grid; grid-template-columns:1fr auto; gap:6px; font-size:13px}
+.ing{display:grid; grid-template-columns: repeat(2, minmax(140px,1fr)); gap:6px}
+.ing div{display:flex; justify-content:space-between; gap:10px; border-bottom:1px dashed rgba(0,0,0,.05); padding:2px 0}
+footer.site{border-top:1px solid var(--border); margin-top:28px; padding:14px 0; color:#6B7280; font-size:14px}
+.small{font-size:12px;color:#6B7280}
+@media print{
+  header.site, .controls, .actions { display:none !important }
+  body{background:#fff}
+  .wrap{max-width:100%; padding:0 8mm}
+  .card{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap inner">
+      <div class="brand">Elizabeth N Exclusives — Weekly Nigerian Meal Planner</div>
+      <div class="actions">
+        <a class="ghost" href="#" onclick="window.print()">Print</a>
+        <a class="ghost" href="#" id="downloadCSV">Download shopping list (CSV)</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <h1>Nigerian 7‑Day Meal Planner</h1>
+    <p class="lead">Meals use common Nigerian ingredients. Quantities below are for <b><span id="servingsView">4</span> servings</b> by default — adjust to your family size.</p>
+
+    <div class="controls">
+      <label>Servings<br><input type="number" id="servings" value="4" min="1" max="12"></label>
+      <label>Include snacks in shopping list?<br>
+        <select id="snacks">
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </label>
+      <a class="ghost" href="#" id="resetBtn">Reset to defaults</a>
+    </div>
+
+    <section class="grid" id="planner">
+      <!-- JS renders days and meals with details -->
+    </section>
+
+    <section class="card">
+      <h3>Auto‑Generated Shopping List</h3>
+      <p class="small">Quantities update with servings. Grouped for easy shopping.</p>
+      <div id="shopping"></div>
+    </section>
+
+    <footer class="site"><div class="wrap">&copy; <span id="year"></span> Elizabeth N Exclusives Market Hub — Support: <a href="mailto:lizukandu@gmail.com">lizukandu@gmail.com</a></div></footer>
+  </main>
+
+  <script>
+  const DISHES = {"akara_pap": {"name": "Akara & Pap (Akamu) + Banana", "ingredients": {"Brown beans (peeled)": {"qty": 3, "unit": "cups"}, "Onion": {"qty": 1, "unit": "large"}, "Scotch bonnet (atarodo)": {"qty": 2, "unit": "pcs"}, "Salt": {"qty": 1, "unit": "tsp"}, "Vegetable oil (frying)": {"qty": 500, "unit": "ml"}, "Pap (ogi/akamu)": {"qty": 4, "unit": "cups"}, "Sugar or honey (optional)": {"qty": 4, "unit": "tsp"}, "Evaporated milk (optional)": {"qty": 1, "unit": "tin"}, "Banana": {"qty": 4, "unit": "pcs"}}, "notes": "Blend beans with onion/pepper; fry spoonfuls till golden. Serve with pap sweetened to taste."}, "yam_egg_sauce": {"name": "Boiled Yam & Egg Sauce", "ingredients": {"White yam": {"qty": 1.5, "unit": "kg"}, "Eggs": {"qty": 8, "unit": "pcs"}, "Tomatoes": {"qty": 6, "unit": "medium"}, "Onion": {"qty": 1, "unit": "large"}, "Scotch bonnet (atarodo)": {"qty": 2, "unit": "pcs"}, "Vegetable oil": {"qty": 60, "unit": "ml"}, "Salt": {"qty": 1.5, "unit": "tsp"}, "Seasoning cubes": {"qty": 2, "unit": "pcs"}}, "notes": "Boil yam with salt. Make saucy egg scramble with tomatoes, onion, pepper."}, "bread_egg_stew": {"name": "Bread & Egg Stew (or Sardine)", "ingredients": {"Sliced bread": {"qty": 1, "unit": "loaf"}, "Eggs": {"qty": 6, "unit": "pcs"}, "Tomatoes": {"qty": 4, "unit": "medium"}, "Onion": {"qty": 1, "unit": "medium"}, "Tomato paste": {"qty": 1, "unit": "tbsp"}, "Vegetable oil": {"qty": 40, "unit": "ml"}, "Salt": {"qty": 1, "unit": "tsp"}, "Seasoning cube": {"qty": 1, "unit": "pc"}, "Sardine (optional)": {"qty": 1, "unit": "tin"}}, "notes": "Quick tomato stew with eggs or sardine; serve with toasted/fresh bread."}, "plantain_egg": {"name": "Fried Plantain (Dodo) & Eggs", "ingredients": {"Ripe plantain": {"qty": 4, "unit": "pcs"}, "Eggs": {"qty": 8, "unit": "pcs"}, "Onion": {"qty": 1, "unit": "medium"}, "Vegetable oil": {"qty": 300, "unit": "ml"}, "Salt": {"qty": 1, "unit": "tsp"}}, "notes": "Fry plantain slices golden; scramble eggs with onions/pepper if desired."}, "oats_groundnut": {"name": "Oats Porridge, Groundnuts & Pawpaw", "ingredients": {"Rolled oats": {"qty": 2, "unit": "cups"}, "Milk (powder/fresh)": {"qty": 2, "unit": "cups"}, "Honey or sugar": {"qty": 4, "unit": "tsp"}, "Groundnuts (roasted)": {"qty": 0.5, "unit": "cup"}, "Pawpaw (papaya)": {"qty": 1, "unit": "medium"}}, "notes": "Cook oats with milk/water; top with groundnuts and pawpaw."}, "moi_moi": {"name": "Moi Moi (Steamed Bean Pudding)", "ingredients": {"Brown beans (peeled)": {"qty": 3, "unit": "cups"}, "Red bell pepper (tatashe)": {"qty": 2, "unit": "pcs"}, "Scotch bonnet": {"qty": 2, "unit": "pcs"}, "Onion": {"qty": 1, "unit": "large"}, "Vegetable oil": {"qty": 60, "unit": "ml"}, "Salt": {"qty": 1.5, "unit": "tsp"}, "Seasoning cube": {"qty": 1, "unit": "pc"}, "Boiled eggs (optional)": {"qty": 4, "unit": "pcs"}}, "notes": "Blend smooth; steam in bowls/leaves with optional egg slices."}, "sweet_pot_egg": {"name": "Boiled Sweet Potato & Egg Sauce", "ingredients": {"Sweet potatoes": {"qty": 1.2, "unit": "kg"}, "Eggs": {"qty": 8, "unit": "pcs"}, "Tomatoes": {"qty": 4, "unit": "medium"}, "Onion": {"qty": 1, "unit": "medium"}, "Vegetable oil": {"qty": 40, "unit": "ml"}, "Salt": {"qty": 1, "unit": "tsp"}}, "notes": "Boil potatoes; make quick egg sauce with tomatoes/onion."}, "jollof_chicken": {"name": "Nigerian Jollof Rice & Grilled Chicken + Slaw", "ingredients": {"Long\u2011grain rice": {"qty": 4, "unit": "cups"}, "Chicken (mixed cuts)": {"qty": 1.5, "unit": "kg"}, "Tomatoes": {"qty": 10, "unit": "medium"}, "Red bell pepper (tatashe)": {"qty": 3, "unit": "pcs"}, "Scotch bonnet": {"qty": 3, "unit": "pcs"}, "Onion": {"qty": 2, "unit": "large"}, "Tomato paste": {"qty": 3, "unit": "tbsp"}, "Chicken stock": {"qty": 3, "unit": "cups"}, "Vegetable oil": {"qty": 120, "unit": "ml"}, "Butter (optional)": {"qty": 2, "unit": "tbsp"}, "Bay leaf": {"qty": 2, "unit": "pcs"}, "Curry powder": {"qty": 2, "unit": "tsp"}, "Thyme": {"qty": 1, "unit": "tsp"}, "Seasoning cubes": {"qty": 3, "unit": "pcs"}, "Salt": {"qty": 2, "unit": "tsp"}, "Cabbage": {"qty": 0.5, "unit": "head"}, "Carrots": {"qty": 3, "unit": "pcs"}, "Mayonnaise": {"qty": 0.5, "unit": "cup"}}, "notes": "Parboil rice; cook in rich pepper-tomato base. Grill seasoned chicken. Toss simple slaw."}, "efo_riro_eba": {"name": "Efo Riro (Spinach/\u00dagwu) with Beef & Ponmo + Eba", "ingredients": {"Spinach/\u00dagwu": {"qty": 600, "unit": "g"}, "Beef (chunks)": {"qty": 800, "unit": "g"}, "Ponmo (cow skin)": {"qty": 300, "unit": "g"}, "Palm oil": {"qty": 80, "unit": "ml"}, "Tomatoes": {"qty": 4, "unit": "medium"}, "Red bell pepper": {"qty": 2, "unit": "pcs"}, "Scotch bonnet": {"qty": 2, "unit": "pcs"}, "Onion": {"qty": 1, "unit": "large"}, "Crayfish (ground)": {"qty": 2, "unit": "tbsp"}, "Seasoning cubes": {"qty": 2, "unit": "pcs"}, "Salt": {"qty": 1.5, "unit": "tsp"}, "Garri (for eba)": {"qty": 4, "unit": "cups"}}, "notes": "Fry pepper mix in palm oil; add meats/stock; fold in greens last. Serve with eba."}, "egusi_poundo": {"name": "Egusi Soup (Goat) + Poundo Yam", "ingredients": {"Egusi (ground melon)": {"qty": 2, "unit": "cups"}, "Goat meat": {"qty": 1, "unit": "kg"}, "Stockfish (optional)": {"qty": 100, "unit": "g"}, "Dry fish (optional)": {"qty": 100, "unit": "g"}, "Palm oil": {"qty": 100, "unit": "ml"}, "Spinach/\u00dagwu": {"qty": 400, "unit": "g"}, "Onion": {"qty": 1, "unit": "large"}, "Scotch bonnet": {"qty": 2, "unit": "pcs"}, "Crayfish (ground)": {"qty": 2, "unit": "tbsp"}, "Seasoning cubes": {"qty": 2, "unit": "pcs"}, "Salt": {"qty": 1.5, "unit": "tsp"}, "Poundo yam flour": {"qty": 4, "unit": "cups"}}, "notes": "Fry egusi paste, add meats/stock, finish with greens. Serve with poundo."}, "okra_fish_semo": {"name": "Okra Soup with Smoked Fish + Semo", "ingredients": {"Okra": {"qty": 600, "unit": "g"}, "Smoked fish": {"qty": 300, "unit": "g"}, "Palm oil": {"qty": 60, "unit": "ml"}, "Onion": {"qty": 1, "unit": "medium"}, "Scotch bonnet": {"qty": 2, "unit": "pcs"}, "Crayfish (ground)": {"qty": 1.5, "unit": "tbsp"}, "Seasoning cube": {"qty": 1, "unit": "pc"}, "Salt": {"qty": 1, "unit": "tsp"}, "Semolina": {"qty": 4, "unit": "cups"}}, "notes": "Saut\u00e9 okra briefly; add fish and seasonings. Serve with semo."}, "ofada_ayamase": {"name": "Ofada Rice & Ayamase (Green Pepper Sauce) + Boiled Eggs", "ingredients": {"Ofada rice": {"qty": 4, "unit": "cups"}, "Green bell pepper": {"qty": 6, "unit": "pcs"}, "Green scotch bonnet": {"qty": 4, "unit": "pcs"}, "Onion": {"qty": 2, "unit": "large"}, "Palm oil (bleached lightly)": {"qty": 120, "unit": "ml"}, "Assorted beef (shaki etc.)": {"qty": 800, "unit": "g"}, "Locust beans (iru)": {"qty": 2, "unit": "tbsp"}, "Seasoning cubes": {"qty": 2, "unit": "pcs"}, "Salt": {"qty": 1.5, "unit": "tsp"}, "Boiled eggs": {"qty": 4, "unit": "pcs"}}, "notes": "Blend green peppers coarsely; fry in palm oil with iru/meats. Serve with ofada rice."}, "beans_dodo": {"name": "Beans Porridge (Ewa Riro) & Dodo", "ingredients": {"Honey/brown beans": {"qty": 3, "unit": "cups"}, "Palm oil": {"qty": 80, "unit": "ml"}, "Onion": {"qty": 1, "unit": "large"}, "Scotch bonnet": {"qty": 2, "unit": "pcs"}, "Crayfish (ground)": {"qty": 1, "unit": "tbsp"}, "Salt": {"qty": 1.5, "unit": "tsp"}, "Ripe plantain": {"qty": 3, "unit": "pcs"}, "Vegetable oil (frying)": {"qty": 300, "unit": "ml"}}, "notes": "Cook beans till soft; finish with palm\u2011oil pepper sauce. Serve with fried plantain."}, "fried_rice_turkey": {"name": "Fried Rice & Turkey", "ingredients": {"Long\u2011grain rice": {"qty": 4, "unit": "cups"}, "Turkey": {"qty": 1.2, "unit": "kg"}, "Carrots": {"qty": 3, "unit": "pcs"}, "Green peas": {"qty": 1, "unit": "cup"}, "Sweet corn": {"qty": 1, "unit": "cup"}, "Spring onion": {"qty": 1, "unit": "bunch"}, "Green bell pepper": {"qty": 1, "unit": "pc"}, "Vegetable oil": {"qty": 80, "unit": "ml"}, "Curry powder": {"qty": 2, "unit": "tsp"}, "Thyme": {"qty": 1, "unit": "tsp"}, "Seasoning cubes": {"qty": 2, "unit": "pcs"}, "Salt": {"qty": 1.5, "unit": "tsp"}}, "notes": "Parboil rice in spiced stock; stir\u2011fry with veg. Grill/ fry turkey."}, "pepper_soup_plantain": {"name": "Goat/Fish Pepper Soup & Boiled Plantain", "ingredients": {"Goat meat or fish": {"qty": 1, "unit": "kg"}, "Pepper soup spice blend": {"qty": 2, "unit": "tbsp"}, "Scotch bonnet": {"qty": 2, "unit": "pcs"}, "Onion": {"qty": 1, "unit": "medium"}, "Scent leaf (nchuawun)": {"qty": 1, "unit": "bunch"}, "Seasoning cube": {"qty": 2, "unit": "pcs"}, "Salt": {"qty": 1.5, "unit": "tsp"}, "Unripe plantain": {"qty": 4, "unit": "pcs"}}, "notes": "Simmer protein with spice blend till tender; finish with scent leaf. Serve with boiled plantain."}, "native_jollof": {"name": "Native Jollof (Palm\u2011oil Rice) with Smoked Fish & Ugu", "ingredients": {"Local rice": {"qty": 4, "unit": "cups"}, "Palm oil": {"qty": 80, "unit": "ml"}, "Smoked fish": {"qty": 200, "unit": "g"}, "Crayfish (ground)": {"qty": 2, "unit": "tbsp"}, "Uziza or ugu leaves": {"qty": 200, "unit": "g"}, "Onion": {"qty": 1, "unit": "large"}, "Scotch bonnet": {"qty": 2, "unit": "pcs"}, "Seasoning cubes": {"qty": 2, "unit": "pcs"}, "Salt": {"qty": 1.5, "unit": "tsp"}}, "notes": "Cook rice in seasoned palm\u2011oil base with smoked fish and greens."}, "banga_rice": {"name": "Banga (Palm Nut) Soup + White Rice", "ingredients": {"Palm nut extract": {"qty": 800, "unit": "ml"}, "Assorted meat/fish": {"qty": 800, "unit": "g"}, "Banga spices": {"qty": 1, "unit": "tbsp"}, "Crayfish (ground)": {"qty": 1, "unit": "tbsp"}, "Atama/ogiri (optional)": {"qty": 1, "unit": "tbsp"}, "Seasoning cubes": {"qty": 2, "unit": "pcs"}, "Salt": {"qty": 1.5, "unit": "tsp"}, "White rice": {"qty": 4, "unit": "cups"}}, "notes": "Simmer palm\u2011nut soup with proteins and spices; serve with white rice."}, "noodles_stirfry": {"name": "Veggie Noodles & Boiled Egg", "ingredients": {"Instant noodles": {"qty": 6, "unit": "packs"}, "Eggs": {"qty": 6, "unit": "pcs"}, "Carrots": {"qty": 2, "unit": "pcs"}, "Green pepper": {"qty": 1, "unit": "pc"}, "Spring onion": {"qty": 1, "unit": "bunch"}, "Vegetable oil": {"qty": 30, "unit": "ml"}}, "notes": "Stir\u2011fry parboiled noodles with veg; top with boiled eggs."}, "asaro": {"name": "Yam Porridge (Asaro) with Smoked Fish", "ingredients": {"White yam": {"qty": 1.5, "unit": "kg"}, "Palm oil": {"qty": 80, "unit": "ml"}, "Tomatoes": {"qty": 3, "unit": "medium"}, "Red bell pepper": {"qty": 1, "unit": "pc"}, "Scotch bonnet": {"qty": 2, "unit": "pcs"}, "Onion": {"qty": 1, "unit": "large"}, "Smoked fish": {"qty": 150, "unit": "g"}, "Crayfish (ground)": {"qty": 1, "unit": "tbsp"}, "Seasoning cube": {"qty": 1, "unit": "pc"}, "Salt": {"qty": 1, "unit": "tsp"}}, "notes": "Cook yam chunks in pepper base; finish with palm oil and smoked fish."}, "suya_salad": {"name": "Suya Chicken & Simple Salad", "ingredients": {"Chicken breast/thigh": {"qty": 800, "unit": "g"}, "Suya spice (yaji)": {"qty": 3, "unit": "tbsp"}, "Groundnut oil": {"qty": 30, "unit": "ml"}, "Salt": {"qty": 1, "unit": "tsp"}, "Cabbage": {"qty": 0.5, "unit": "head"}, "Cucumber": {"qty": 2, "unit": "pcs"}, "Tomatoes": {"qty": 3, "unit": "medium"}, "Onion": {"qty": 1, "unit": "small"}}, "notes": "Marinate chicken in yaji/oil; grill or pan\u2011sear. Serve with fresh salad."}};
+  const PLAN = [{"day": "Day 1 (Mon)", "breakfast": "akara_pap", "lunch": "jollof_chicken", "dinner": "pepper_soup_plantain", "snack": "Pineapple wedges + groundnuts"}, {"day": "Day 2 (Tue)", "breakfast": "yam_egg_sauce", "lunch": "efo_riro_eba", "dinner": "suya_salad", "snack": "Yoghurt (unsweetened) + banana"}, {"day": "Day 3 (Wed)", "breakfast": "bread_egg_stew", "lunch": "egusi_poundo", "dinner": "noodles_stirfry", "snack": "Apple or African pear (ube)"}, {"day": "Day 4 (Thu)", "breakfast": "plantain_egg", "lunch": "okra_fish_semo", "dinner": "native_jollof", "snack": "Tiger nuts + dates"}, {"day": "Day 5 (Fri)", "breakfast": "oats_groundnut", "lunch": "ofada_ayamase", "dinner": "asaro", "snack": "Chapman\u2011style zobo + peanuts"}, {"day": "Day 6 (Sat)", "breakfast": "moi_moi", "lunch": "beans_dodo", "dinner": "fried_rice_turkey", "snack": "Fruit salad cup"}, {"day": "Day 7 (Sun)", "breakfast": "sweet_pot_egg", "lunch": "banga_rice", "dinner": "leftovers", "snack": "Chin\u2011chin + zobo"}];
+
+  const CATEGORIES = [
+    ["Grains & Tubers", ["rice","ofada","local rice","white rice","garri","semolina","poundo","yam","sweet potatoes","instant noodles","oats"]],
+    ["Proteins", ["chicken","turkey","beef","goat","fish","smoked fish","stockfish","eggs","ponmo","groundnuts"]],
+    ["Vegetables & Greens", ["spinach","ugwu","cabbage","carrots","spring onion","onion","green pepper","red bell","bell pepper","okra","cucumber","uziza","scent leaf","tomatoes","pepper"]],
+    ["Fruits & Extras", ["banana","pawpaw","pineapple","apple","tiger nuts","dates","yoghurt","corn","peas"]],
+    ["Pantry, Oils & Spices", ["palm oil","vegetable oil","butter","tomato paste","crayfish","curry","thyme","bay leaf","seasoning","salt","iru","banga spice","pepper soup","groundnut oil","sugar","honey"]]
+  ];
+
+  function titleCase(s){ return s.replace(/\b\w/g,c=>c.toUpperCase()); }
+  function idToName(id){ return DISHES[id] ? DISHES[id].name : titleCase(id); }
+
+  function renderPlanner(){
+    const root = document.getElementById('planner');
+    root.innerHTML = "";
+    PLAN.forEach(day => {
+      const card = document.createElement('article'); card.className = "card";
+      card.innerHTML = `
+        <span class="badge">${day.day}</span>
+        <div class="meal"><b>Breakfast:</b> ${idToName(day.breakfast)}</div>
+        <div class="meal"><b>Lunch:</b> ${idToName(day.lunch)}</div>
+        <div class="meal"><b>Dinner:</b> ${idToName(day.dinner)}</div>
+        <div class="meal"><b>Snack:</b> ${day.snack}</div>
+        <details style="margin-top:8px">
+          <summary>See ingredients & notes</summary>
+          <div id="detail_${day.day.replace(/\W/g,'_')}"></div>
+        </details>
+      `;
+      root.appendChild(card);
+      const detail = card.querySelector(`#detail_${day.day.replace(/\W/g,'_')}`);
+      [day.breakfast, day.lunch, day.dinner].forEach(did => {
+        if(!DISHES[did]) return;
+        const dish = DISHES[did];
+        const ingList = Object.entries(dish.ingredients).map(([name, obj]) => `<div><span>${name}</span><span data-ing="${did}::${name}">${obj.qty} ${obj.unit}</span></div>`).join("");
+        const block = document.createElement('div');
+        block.style.marginTop = "10px";
+        block.innerHTML = `
+          <p><b>${dish.name}</b></p>
+          <div class="ing">${ingList}</div>
+          <p class="small" style="margin-top:6px">${dish.notes||""}</p>
+        `;
+        detail.appendChild(block);
+      });
+    });
+  }
+
+  function normalizeKey(k){
+    return k.toLowerCase()
+     .replace(/\(.*?\)/g,"").replace(/\b(red|green)\b/g,"").replace(/[^a-z\s]/g,"").replace(/\s+/g," ").trim();
+  }
+
+  function buildShopping(){
+    const servings = Number(document.getElementById('servings').value) || 4;
+    document.getElementById('servingsView').textContent = servings;
+    const includeSnacks = document.getElementById('snacks').value === "yes";
+
+    // Aggregate ingredients
+    const tally = {}; // key -> {qty, unit, name}
+    PLAN.forEach(day => {
+      [day.breakfast, day.lunch, day.dinner].forEach(did => {
+        const dish = DISHES[did]; if(!dish) return;
+        Object.entries(dish.ingredients).forEach(([name, obj]) => {
+          const key = normalizeKey(name);
+          const mult = servings/4;
+          const qty = (obj.qty||0) * mult;
+          if(!tally[key]) tally[key] = {qty:0, unit:obj.unit, name};
+          if(tally[key].unit === obj.unit) tally[key].qty += qty;
+          else {
+            // different units? append as note
+            if(!tally[key].note) tally[key].note = [];
+            tally[key].note.push(`${qty} ${obj.unit}`);
+          }
+        });
+      });
+      if(includeSnacks) {
+        // snacks are not quantified precisely; skip
+      }
+    });
+
+    // Group into categories using simple keyword matching
+    function categoryFor(name){
+      const n = normalizeKey(name);
+      for(const [cat, list] of CATEGORIES){
+        for(const item of list){
+          if(n.includes(item)) return cat;
+        }
+      }
+      return "Other";
+    }
+
+    const groups = {};
+    Object.values(tally).forEach(it => {
+      const cat = categoryFor(it.name);
+      if(!groups[cat]) groups[cat] = [];
+      groups[cat].push(it);
+    });
+    for(const g in groups) groups[g].sort((a,b)=>a.name.localeCompare(b.name));
+
+    // Render
+    const root = document.getElementById('shopping');
+    root.innerHTML = "";
+    Object.keys(groups).sort().forEach(cat => {
+      const box = document.createElement('div'); box.className = "card";
+      box.innerHTML = `<h4 style="margin:6px 0">${cat}</h4>`;
+      const list = document.createElement('div'); list.className = "ing";
+      groups[cat].forEach(it => {
+        const qty = (Math.round(it.qty*100)/100).toString().replace(/\.0+$/,"");
+        const note = it.note ? ` (+ ${it.note.join(", ")})` : "";
+        const row = document.createElement('div');
+        row.innerHTML = `<span>${it.name}</span><span>${qty} ${it.unit}${note}</span>`;
+        list.appendChild(row);
+      });
+      box.appendChild(list);
+      root.appendChild(box);
+    });
+
+    // Update per-dish detail quantities
+    document.querySelectorAll('[data-ing]').forEach(span => {
+      const [did, n] = span.getAttribute('data-ing').split("::");
+      const obj = DISHES[did].ingredients[n];
+      const q = (obj.qty * servings/4);
+      span.textContent = `${Math.round(q*100)/100} ${obj.unit}`;
+    });
+  }
+
+  function downloadCSV(){
+    const rows = [["Category","Item","Qty","Unit"]];
+    document.querySelectorAll('#shopping .card').forEach(cat => {
+      const category = cat.querySelector('h4').innerText;
+      cat.querySelectorAll('.ing div').forEach(row => {
+        const item = row.children[0].innerText;
+        const rhs = row.children[1].innerText;
+        const m = rhs.match(/([\d\.]+)\s+(\S+)/);
+        let qty = "", unit = "";
+        if(m) { qty = m[1]; unit = m[2]; }
+        rows.push([category, item, qty, unit]);
+      });
+    });
+    const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g,'""')}"`).join(",")).join("\n");
+    const blob = new Blob([csv], {type:"text/csv"});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = "nigerian-meal-shopping-list.csv"; a.click();
+  }
+
+  // Init
+  document.getElementById('year').textContent = new Date().getFullYear();
+  renderPlanner();
+  buildShopping();
+  document.getElementById('servings').addEventListener('input', buildShopping);
+  document.getElementById('snacks').addEventListener('change', buildShopping);
+  document.getElementById('resetBtn').addEventListener('click', e => { e.preventDefault(); document.getElementById('servings').value=4; document.getElementById('snacks').value="yes"; buildShopping(); });
+  document.getElementById('downloadCSV').addEventListener('click', e => { e.preventDefault(); downloadCSV(); });
+  </script>
+</body>
+</html>
